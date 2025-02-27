@@ -27,10 +27,13 @@ android {
         applicationId = "com.example.bilingual_buddy"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        //minSdk = flutter.minSdkVersion
+        //targetSdk = flutter.targetSdkVersion
+        minSdkVersion 23 //min is 23 because firebase throws a fit if its any lower
+        targetSdkVersion 35 //target is 35 since the pixel tablet we're using is on 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
     }
 
     buildTypes {
