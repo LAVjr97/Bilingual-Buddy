@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'login_page.dart'; //login page
+import 'landing_page.dart'; //landing page
 import 'firebase_options.dart'; 
 
 void main() async {
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login App',
+      title: 'Bilingual Buddy',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: LoginPage(),
+      home: LandingPage(),
     );
   }
 }
