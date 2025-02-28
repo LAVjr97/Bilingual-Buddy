@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dashboard_screen.dart'; //Send user to dashboard after login
 import 'dart:developer';
 import 'package:google_fonts/google_fonts.dart';
+import 'landing_page.dart';
 
 void signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -57,6 +58,56 @@ Future<User?> registerUser(String email, String password, String username) async
   }
 }
 
+class ArrowPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Color(0xD50C2D57)
+      ..style = PaintingStyle.fill;
+
+    final path = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class CustomArrowButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  CustomArrowButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        /*shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),*/
+        padding: EdgeInsets.zero,
+      ),
+      child: CustomPaint(
+        size: Size(91, 93),
+        painter: ArrowPainter(),
+      ),
+    );
+  }
+}
+
+
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -82,6 +133,12 @@ class _LoginPageState extends State<LoginPage> {
       passwordController.clear();
     }
   }
+
+  void landingPage() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LandingPage()));
+  }
+
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,7 +282,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     
-                    Align( //Back arrow
+                    /*Align( //Back arrow
                       alignment: Alignment(-0.85, -0.85),
                       child: Transform(
                         transform: Matrix4.identity()..translate(0.0, 0.0)..rotateZ(0.52),
@@ -238,7 +295,18 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+                    ),*/
+
+                    Align( //Back arrow
+                      alignment: Alignment(-0.9, -0.65),
+                      child: Transform(
+                        transform: Matrix4.identity()..translate(0.0, 0.0)..rotateZ(-1.57),
+                        child: CustomArrowButton(
+                          onPressed: landingPage,
+                        )
+                      ),
                     ),
+
                   ],
                 ),
               ),
