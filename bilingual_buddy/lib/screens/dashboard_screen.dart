@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'lecture_quiz_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'usefulWidgets.dart';
+import 'useful_widgets.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
