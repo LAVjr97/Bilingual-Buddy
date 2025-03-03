@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'login_page.dart';
+import 'lecture_quiz_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'usefulWidgets.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -11,66 +11,13 @@ class DashboardScreen extends StatefulWidget {
 class _DashBoardState extends State<DashboardScreen>{
 
   void fractionsPage() async{
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => FractionsLectureQuiz()));  
     return;
   }
 
   void decimalPage() async{
     return;
-  }
-
-  Widget buttonText(String topEmoji, String bottomText){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Align( //Top Emoji
-              alignment: Alignment(0.0, 0.0),
-              child: SizedBox(
-                width: 187,
-                height: 188,
-                child: Align(
-                  alignment: Alignment(0.0, 2.0),
-                  child: Text(
-                    topEmoji,
-                    style: GoogleFonts.notoColorEmoji(
-                      color: Colors.black,
-                      fontSize: 120,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                )
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Align( //Bottom Text
-              alignment: Alignment(0.5, 0.0),
-              child: SizedBox(
-                width: 418,
-                height: 195,
-                child: Align(
-                  alignment: Alignment(0.0, 0.0),
-                  child: Text(
-                    bottomText,
-                    style: TextStyle(
-                      color: Color(0xFF0C2D57),
-                      fontSize: 75,
-                      fontFamily: 'Outfit',
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                )
-              ),
-            )
-          ],
-        )
-      ]
-    );
   }
 
   @override 
@@ -160,47 +107,8 @@ class _DashBoardState extends State<DashboardScreen>{
 
                     Align( //Widget that holds the two "buttons" for fraction and deciaml
                       alignment: Alignment(0.0, 0.75),
-                      child: Stack(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox( //Fraction's button
-                                width: 536.48,
-                                height: 385,
-                                child: ElevatedButton(
-                                  onPressed: fractionsPage,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFFFFF5CD),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(width: 1),
-                                      borderRadius: BorderRadius.circular(84),
-                                    ),
-                                  ),
-                                  child: buttonText('➗', 'Fraction'),
-                                )
-                              ),
-
-                              SizedBox( //Decimal's button
-                                width: 536.48,
-                                height: 385,
-                                child: ElevatedButton(
-                                  onPressed: decimalPage,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFFFFF5CD),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(width: 1),
-                                      borderRadius: BorderRadius.circular(84),
-                                    ),
-                                  ),
-                                  child: buttonText('🔢', 'Decimal'),
-                                )
-                              ),
-                            ]
-                          )
-                        ],
-                      )
-                    ),
+                      child: buttonPairEmojiText('➗', 'Fraction', fractionsPage, '🔢', 'Decimal', decimalPage),
+                    )
 
                     
                   ]
