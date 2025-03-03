@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dashboard_screen.dart'; //Send user to dashboard after login
+import 'screens/dashboard_screen.dart'; //Send user to dashboard after login
 import 'dart:developer';
 import 'package:google_fonts/google_fonts.dart';
-import 'landing_page.dart';
-import 'useful_widgets.dart';
+import 'screens/landing_page.dart';
 
 void signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -57,6 +56,56 @@ Future<User?> registerUser(String email, String password, String username) async
   }
 }
 
+class ArrowPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Color(0xD50C2D57)
+      ..style = PaintingStyle.fill;
+
+    final path = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class CustomArrowButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  CustomArrowButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        /*shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),*/
+        padding: EdgeInsets.zero,
+      ),
+      child: CustomPaint(
+        size: Size(91, 93),
+        painter: ArrowPainter(),
+      ),
+    );
+  }
+}
+
+
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -85,23 +134,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void landingPage() {
     Navigator.pushReplacement(
-      context,PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => LandingPage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(-1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.easeInOut;
-
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          var offsetAnimation = animation.drive(tween);
-
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
-        },
-      ),
-    );
+        context, MaterialPageRoute(builder: (context) => LandingPage()));
   }
 
   @override 
@@ -246,6 +279,21 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       ),
                     ),
+                    
+                    /*Align( //Back arrow
+                      alignment: Alignment(-0.85, -0.85),
+                      child: Transform(
+                        transform: Matrix4.identity()..translate(0.0, 0.0)..rotateZ(0.52),
+                        child: Container(
+                          width: 91,
+                          height: 93,
+                          decoration: ShapeDecoration(
+                            color: Color(0xD50C2D57),
+                            shape: StarBorder.polygon(sides: 3),
+                          ),
+                        ),
+                      ),
+                    ),*/
 
                     Align( //Back arrow
                       alignment: Alignment(-0.9, -0.65),

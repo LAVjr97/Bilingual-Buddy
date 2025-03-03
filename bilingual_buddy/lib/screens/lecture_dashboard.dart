@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
 import 'useful_widgets.dart';
-import 'lecture_dashboard.dart';
+import 'lecture_quiz_screen.dart';
+import 'lessons_page.dart';
 
-class FractionsLectureQuiz extends StatefulWidget{
+
+class FractionsLecture extends StatefulWidget{
   @override
-  _FractionsLectureQuiz createState() => _FractionsLectureQuiz();
+  _FractionsLecture createState() => _FractionsLecture();
 }
 
-class _FractionsLectureQuiz extends State<FractionsLectureQuiz>{
-  void fractionsLecturePage() async{
+class _FractionsLecture extends State<FractionsLecture>{
+
+  void fractionLessons() async{
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => FractionsLecture()));  
+      context, MaterialPageRoute(builder: (context) => FractionsLessons()));  
+
   }
 
-  void fractionsQuizPage() async{
-    return; 
+  void fractionExercise() async{
+    return;
   }
 
-  void dashBoardPage() async{//This creates a transistion that goes from left to right, where the default is right to left 
+  void fractionFlashcards() async{
+    return;
+  }
+
+  void fractionDashBoardPage() async{//This creates a transistion that goes from left to right, where the default is right to left 
     Navigator.pushReplacement( 
       context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => DashboardScreen(), 
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsLectureQuiz(), 
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
@@ -52,8 +59,9 @@ class _FractionsLectureQuiz extends State<FractionsLectureQuiz>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                  backTextMenuBar(dashBoardPage, "Fraction"),
-                  buttonPairEmojiText('📖', 'Lecture', fractionsLecturePage, '📝', 'Quiz', fractionsQuizPage)
+                    backTextMenuBar(fractionDashBoardPage, "Fraction Lecture"),
+                    buttonPairText('Lessons', fractionLessons, 'Exercise', fractionExercise, x: 0.0, y: -0.25, width: 412, height: 250, spacer: 35,fontSize: 70),
+                    buttonText('Flashcards', fractionFlashcards, y: 0.75, width: 412, height: 250, fontSize: 70)
                   ]
                 )
               )
@@ -64,5 +72,3 @@ class _FractionsLectureQuiz extends State<FractionsLectureQuiz>{
     );
   }
 }
- 
-//We can create the lecture and quiz screen for deciamls in this file as well
