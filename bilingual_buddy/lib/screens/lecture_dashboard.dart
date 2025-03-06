@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lecture_quiz_screen.dart';
 import 'lessons_page.dart';
+import 'dashboard_screen.dart';
 
 
 class FractionsLecture extends StatefulWidget{
@@ -17,8 +18,9 @@ class _FractionsLecture extends State<FractionsLecture>{
 
   }
 
-  void fractionExercise() async{
-    return;
+  void fractionQuizzes() async{
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => FractionsQuizzes()));
   }
 
   void fractionFlashcards() async{
@@ -28,7 +30,7 @@ class _FractionsLecture extends State<FractionsLecture>{
   void fractionDashBoardPage() async{//This creates a transistion that goes from left to right, where the default is right to left 
     Navigator.pushReplacement( 
       context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => FractionsLectureQuiz(), 
+        pageBuilder: (context, animation, secondaryAnimation) => DashboardScreen(), 
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
@@ -60,7 +62,7 @@ class _FractionsLecture extends State<FractionsLecture>{
                 child: Stack(
                   children: [
                     backTextMenuBar(fractionDashBoardPage, "Fraction Lecture"),
-                    buttonPairText('Lessons', fractionLessons, 'Exercise', fractionExercise, x: 0.0, y: -0.25, width: 412, height: 250, spacer: 35,fontSize: 70),
+                    buttonPairText('Lessons', fractionLessons, 'Quizzes', fractionQuizzes, x: 0.0, y: -0.25, width: 412, height: 250, spacer: 35,fontSize: 70),
                     buttonText('Flashcards', fractionFlashcards, y: 0.75, width: 412, height: 250, fontSize: 70)
                   ]
                 )
