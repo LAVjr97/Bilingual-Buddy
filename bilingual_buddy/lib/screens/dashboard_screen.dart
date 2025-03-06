@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'lecture_quiz_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'useful_widgets.dart';
+import 'lecture_dashboard.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _DashBoardState extends State<DashboardScreen>{
 
   void fractionsPage() async{
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => FractionsLectureQuiz()));  
+      context, MaterialPageRoute(builder: (context) => FractionsLecture()));  
     return;
   }
 
