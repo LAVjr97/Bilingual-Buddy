@@ -311,8 +311,8 @@ Widget buttonPairEmojiText(String leftTopEmoji, String leftBottomText, VoidCallb
 
 Widget backTextMenuBar(VoidCallback pressed, String label, [double x = 0.0, double y = -0.85]){
   return Align( //A row of widgets, back button labeled as fraction, and 3 stack button
-    alignment: Alignment(x, y),
-    child: SizedBox(
+    alignment: Alignment(x, y), 
+    child: SizedBox( 
       width: 1150,
       height: 105,
       child:Row(
@@ -352,6 +352,147 @@ Widget backTextMenuBar(VoidCallback pressed, String label, [double x = 0.0, doub
   );
 }
 
+Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor, int? textColor}) {
+  x ??= -0.85;
+  y ??= 0.85;
+
+  width ??= 733;
+  height ??= 614;
+
+  fontSize ??= 64;
+  boxColor ??= 0xFFFFCFB3;
+  textColor ??= 0xFF0C2D57;
+
+  return Align(
+    alignment: Alignment(x, y),
+    child: Container(
+      width: width,
+      height: height,
+      decoration: ShapeDecoration(
+        color: Color(boxColor),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1),
+          borderRadius: BorderRadius.circular(84),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Align(
+          alignment: Alignment(0.0, 0.0),
+          child: Text(
+            text, 
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(textColor),
+              fontSize: fontSize,
+              fontFamily: 'Outfit',
+              fontWeight: FontWeight.w800,
+            ),
+          )
+        ),
+      )
+
+    ),
+  );
+}
+
+void showCustomDialogEmoji(BuildContext context, String title, String emojis, List<Widget> actions) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1),
+          borderRadius: BorderRadius.circular(84),
+        ),
+        backgroundColor: Color(0xFFFFF5CD), // Custom background color
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SizedBox(
+            width: 712,
+            height: 395,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Color(0xFF0C2D57),
+                    fontSize: 96,
+                    fontFamily: 'Outfit',
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  emojis,
+                  style: GoogleFonts.notoColorEmoji(
+                    color: Colors.black,
+                    fontSize: 96,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: actions,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void showCustomDialog(BuildContext context, String title, List<Widget> actions, {double? fontSize}) {
+    fontSize ??= 55;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1),
+            borderRadius: BorderRadius.circular(84),
+          ),
+          backgroundColor: Color(0xFFFFF5CD), // Custom background color
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SizedBox(
+              width: 712,
+              height: 395,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 60),
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF0C2D57),
+                      fontSize: fontSize,
+                      fontFamily: 'Outfit',
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: actions,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 Widget menuButton(){
   return Align(
     alignment: Alignment(0.0, 0.0),
@@ -362,3 +503,4 @@ Widget menuButton(){
     )
   );
 }
+

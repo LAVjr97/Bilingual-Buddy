@@ -11,8 +11,12 @@ class FractionsQuizzes extends StatefulWidget{
 class _FractionsQuizzes extends State<FractionsQuizzes>{
 
   void tempPage() async{
+    return;
+  }
+
+  void quizOne() async{
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => QuestionsPage()));  
+      context, MaterialPageRoute(builder: (context) => QuestionsPage())); 
   }
 
 
@@ -54,7 +58,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('1', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('1', quizOne, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],
