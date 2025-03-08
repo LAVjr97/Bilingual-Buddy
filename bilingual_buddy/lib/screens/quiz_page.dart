@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dart:math';
+import 'student_info.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Question{
@@ -30,7 +31,7 @@ class TF extends Question{ //True or False class
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
 //string with whatever super.question is given, classes are pretty similar to how it works in cpp.
 
-//Actual screen stuff
+//This class is what's used to display the questions
 class QuestionsPage extends StatefulWidget{
   List<Question> listOfQuestions = [MCQ("¿Cómo se dice un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), MCQ("¿Cómo se dice dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se dice cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)]; //Add the bullshit questions here, use the constructor of MCQ or TF to add questions
   
@@ -43,6 +44,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
   int currentQIndex = 0, firstTryCorrectAnswers = 0;
 
+  //Moves the current index to the next question
   void nextQuestion(){
     if(currentQIndex < widget.listOfQuestions.length - 1){
       setState(() {currentQIndex++;} ); //Set state rebuilds the widget (so like a refresh, updating whater variable we're changing here), increasing currentQIndex
@@ -59,6 +61,7 @@ class _QuestionsPage extends State<QuestionsPage>{
     }
   }
 
+  //Shuffles the list of questions that it recieves from the contrstructor before the first question is shown
   @override
   void initState() {
     super.initState();
@@ -79,12 +82,10 @@ class _QuestionsPage extends State<QuestionsPage>{
           });
         },
       );
-    }
-    else {
-      return Row(); //Replace this with whatever the 
+    } else {
+      return Row(); //Replace this with whatever the true or false questions are going to be
     }
   }
-
 }
 
 class MCQPage extends StatefulWidget {
@@ -194,7 +195,6 @@ class _MCQPage extends State<MCQPage>{
           ),
         ),
       ]
-
     );
   }
 

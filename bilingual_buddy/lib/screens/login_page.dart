@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:google_fonts/google_fonts.dart';
 import 'landing_page.dart';
 import 'useful_widgets.dart';
+import 'student_info.dart';
 
 void signOut() async {
   await FirebaseAuth.instance.signOut();
@@ -29,7 +30,7 @@ Future<User?> loginUser(String email, String password) async {
     
     //Does the actual login 
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
-    
+    //Figure out a way
     return userCredential.user; //Successfully logged in
   } catch (e) {
     log("Login Error: $e");
@@ -80,6 +81,26 @@ class _LoginPageState extends State<LoginPage> {
       log("Login failed");
       emailController.clear();
       passwordController.clear();
+      showCustomDialog(
+        context, 
+        "Incorrect Username or Password!", 
+        [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              "Retry",
+              style: TextStyle(
+                color: Color(0xFF0C2D57),
+                fontSize: 36,
+                fontFamily: 'Outfit',
+                fontWeight: FontWeight.w800,
+              )
+            ),
+          ),
+        ],
+      );
     }
   }
 
