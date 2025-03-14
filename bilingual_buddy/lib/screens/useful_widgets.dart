@@ -405,7 +405,7 @@ void showCustomDialogEmoji(BuildContext context, String title, String emojis, Li
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
         ),
-        backgroundColor: Color(0xFFFFF5CD), // Custom background color
+        backgroundColor: Color(0xFFFFF5CD),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SizedBox(
@@ -458,7 +458,7 @@ void showCustomDialog(BuildContext context, String title, List<Widget> actions, 
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
           ),
-          backgroundColor: Color(0xFFFFF5CD), // Custom background color
+          backgroundColor: Color(0xFFFFF5CD), 
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SizedBox(

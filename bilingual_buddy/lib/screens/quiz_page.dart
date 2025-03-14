@@ -33,7 +33,7 @@ class TF extends Question{ //True or False class
 
 //This class is what's used to display the questions
 class QuestionsPage extends StatefulWidget{
-  List<Question> listOfQuestions = [MCQ("¿Cómo se dice un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), MCQ("¿Cómo se dice dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se dice cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)]; //Add the bullshit questions here, use the constructor of MCQ or TF to add questions
+  List<Question> listOfQuestions = [MCQ("¿Cómo se escribe un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), MCQ("¿Cómo se escribe dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se escribe cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)]; //Add the bullshit questions here, use the constructor of MCQ or TF to add questions
   
   @override
   _QuestionsPage createState() => _QuestionsPage();
@@ -159,6 +159,7 @@ class _MCQPage extends State<MCQPage>{
     );  
   }
 
+  //Pop up if the student wants to leave the quiz using the back button from the top left corner
   void leaveQuiz() async{
     showCustomDialog(
       context,
@@ -198,8 +199,6 @@ class _MCQPage extends State<MCQPage>{
     );
   }
 
-
-  //If the answer selected is correct, we'll can one of these two functions, where TextButton either holds the retry or next functionality that the pop up has
   void correct(){
     if (isFirstTry) {
       widget.onFirstTryCorrect();
@@ -212,7 +211,7 @@ class _MCQPage extends State<MCQPage>{
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
-            widget.onNext();
+            widget.onNext(); //This calls for the next question
           },
           child: Text(
             "Next",
