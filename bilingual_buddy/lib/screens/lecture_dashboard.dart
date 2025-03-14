@@ -3,6 +3,7 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dashboard_screen.dart';
 import 'student_info.dart';
+import 'flashcards.dart';
 
 
 class FractionsLecture extends StatefulWidget{
@@ -24,7 +25,8 @@ class _FractionsLecture extends State<FractionsLecture>{
   }
 
   void fractionFlashcards() async{
-    return;
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => FlashcardViewer()));
   }
 
   void fractionDashBoardPage() async{//This creates a transistion that goes from left to right, where the default is right to left 
