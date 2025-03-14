@@ -20,7 +20,6 @@ Future<void> saveUserData(String uid, String email, String username) async {
   });
 }
 
-
 Future<User?> loginUser(String email, String password) async {
   try {
     String usableEmail = email.split('@')[0]; //Makes sure to remove domain from the email
@@ -30,6 +29,7 @@ Future<User?> loginUser(String email, String password) async {
     
     //Does the actual login 
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
+    
     //Figure out a way
     return userCredential.user; //Successfully logged in
   } catch (e) {
@@ -37,6 +37,48 @@ Future<User?> loginUser(String email, String password) async {
     return null; //Failed login
   }
 }
+
+/*Future<Student?> loginUser(String email, String password) async {
+  const int maxRetries = 5;
+  const Duration initialDelay = Duration(seconds: 1);
+  int retryCount = 0;
+  Duration delay = initialDelay;
+  
+  try {
+    String usableEmail = email.split('@')[0]; //Makes sure to remove domain from the email
+    String domain = "@temp.com"; //Makes a dummy domain that we need
+    usableEmail = '$usableEmail$domain';
+    log("Email given: $usableEmail"); 
+    
+    //Does the actual login 
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: usableEmail, password: password);
+    
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userCredential.user!.uid)
+      .get();
+
+    if (userDoc.exists) {
+      Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>; //Create a Student object from the data
+      Student student = Student.fromFirebase(data);
+      return student; //Successfully logged in
+
+    } else {
+      log("User document not found!");
+      return null;
+    }
+
+  } catch (e) {
+    log("Login Error: $e");
+          if (e is FirebaseException && e.code == 'unavailable') {
+        retryCount++;
+        await Future.delayed(delay);
+        delay *= 2; // Exponential backoff
+      } else {
+        return null; // Failed login for other reasons
+      }
+  }
+} */
 
 Future<User?> registerUser(String email, String password, String username) async {
   try {
@@ -61,20 +103,30 @@ Future<User?> registerUser(String email, String password, String username) async
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
-}
+} 
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void login() async { 
-    String email = emailController.text.trim();
+
+    Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => DashboardScreen()));
+
+    /*String email = emailController.text.trim();
     String password = passwordController.text.trim();
+
+    if(email.isEmpty || password.isEmpty){
+      return;
+    }
     
+    //Student? student = await loginUser(email, password);
     User? user = await loginUser(email, password);
-    
-    if (user != null) {
-      log("Login successful: ${user.email}");
+
+    //if (student != null) {
+    if (user != null){
+      log("Login successful: ${email}");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => DashboardScreen()));
     } else {
@@ -101,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       );
-    }
+    }*/
   }
 
   void landingPage() {
