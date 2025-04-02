@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lecture_dashboard.dart';
 import 'quiz_page.dart';
+import 'lecture_page.dart';
 
 class FractionsQuizzes extends StatefulWidget{
     @override
@@ -114,6 +115,13 @@ class _FractionsLessons extends State<FractionsLessons>{
     );  
   }
 
+
+  //Senior Design.pdf
+  void lecturePage(String path){
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => LessonPage(pdfPath: path))); 
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -131,7 +139,7 @@ class _FractionsLessons extends State<FractionsLessons>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('1', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('1', () => lecturePage("lib/assets/lessons/Senior_Design.pdf"), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],
