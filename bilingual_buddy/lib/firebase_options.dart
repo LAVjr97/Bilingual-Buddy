@@ -72,4 +72,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'bilingual-buddy-18512.firebasestorage.app',
     iosBundleId: 'com.example.bilingualBuddy',
   );
+
 }

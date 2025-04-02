@@ -28,7 +28,7 @@ class _LandingPage extends State<LandingPage>{
                     Align( //Logo 
                       alignment: Alignment(0.0, -0.65),
                       child: Image.asset(
-                        'lib/assets/images/landing_page_logo.png',
+                        'assets/images/landing_page_logo.png',
                         width: 326,
                         height: 329, 
                       ),
