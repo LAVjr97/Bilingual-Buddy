@@ -15,9 +15,9 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
     return;
   }
 
-  void quizOne() async{
+  void quiz(List<Question> questions, int num) async{
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => QuestionsPage())); 
+      context, MaterialPageRoute(builder: (context) => QuestionsPage(questions, num))); 
   }
 
 
@@ -59,8 +59,8 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('1', quizOne, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
-                        buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('1', () => quiz([MCQ("¿Cómo se escribe un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), TF("asd\n", ["False", "True"], 1), MCQ("¿Cómo se escribe dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se escribe cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)], 1), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('2', () => quiz([MCQ("¿Cómo se escribe un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), TF("asd\n", ["False", "True"], 1), MCQ("¿Cómo se escribe dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se escribe cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)], 2), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],
                     ),
