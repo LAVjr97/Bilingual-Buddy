@@ -16,7 +16,7 @@ class Flashcards {
 }
 
 class FlashcardViewer extends StatefulWidget {
-  final List<Flashcards> flashcards = [Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/4"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")];
+  final List<Flashcards> flashcards = [Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/9"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")];
 
   //FlashcardViewer({required this.flashcards});
 
@@ -84,7 +84,7 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
                           itemCount: widget.flashcards.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40.0),
+                              padding: EdgeInsets.symmetric(horizontal: 55.0),
                               child: FlipCard(
                                 key: GlobalKey<FlipCardState>(),
                                 direction: FlipDirection.VERTICAL, // Up/Down Swipe to Flip
