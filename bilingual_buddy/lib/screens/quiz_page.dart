@@ -630,7 +630,7 @@ class _TXTPage extends State<TXTPage> {
     );
   }
 
-    void correct(){
+  void correct(){
     if (isFirstTry) {
       widget.onFirstTryCorrect();
     }

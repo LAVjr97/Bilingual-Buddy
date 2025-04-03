@@ -3,7 +3,6 @@ import 'useful_widgets.dart';
 import 'package:flip_card/flip_card.dart';
 import 'lecture_dashboard.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/src/source.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
 
@@ -27,10 +26,8 @@ class FlashcardViewer extends StatefulWidget {
  
 class _FlashcardViewerState extends State<FlashcardViewer>{
   int _currentIndex = 0;
-  GlobalKey<FlipCardState> _cardKey = GlobalKey<FlipCardState>();
-  double _dragThreshold = 500.0; // Minimum drag distance for swipe detection
-  double _startDragX = 0.0;
 
+  PageController _pageController = PageController(viewportFraction: 0.9);
   @override
   void initState() {
     super.initState();
@@ -58,24 +55,6 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
     );  
   }
 
-  void _nextFlashcard() {
-    setState(() {
-      if (_currentIndex < widget.flashcards.length - 1) {
-        _currentIndex++;
-        _cardKey = GlobalKey<FlipCardState>(); //Makes sure that the card is set to the "white" side
-      }
-    });
-  }
-
-  void _previousFlashcard() {
-    setState(() {
-      if (_currentIndex > 0) {
-        _currentIndex--;
-        _cardKey = GlobalKey<FlipCardState>(); //Makes sure that the card is set to the "white" side
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {                             
     return Scaffold(
@@ -90,57 +69,44 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
                 child: Stack(
                   children: [
                     backTextMenuBar(fractionsLecture, "Lesson 1 Exercises"),
-
                     Align(
                       alignment: Alignment(0.0, 0.5),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              GestureDetector(
-                                onHorizontalDragStart: (details) {
-                                  _startDragX = details.globalPosition.dx; // Track initial position
-                                },
-                                onHorizontalDragUpdate: (details) {
-                                  double dragDistance = details.globalPosition.dx - _startDragX;
-
-                                  if (dragDistance.abs() > _dragThreshold) {
-                                    if (dragDistance < 0) {
-                                      _nextFlashcard(); // Swipe left → Next card
-                                    } else {
-                                      _previousFlashcard(); // Swipe right → Previous card
-                                    }
-                                    _startDragX = details.globalPosition.dx; // Reset drag position
-                                  }
-                                },
-
-                                child: FlipCard(
-                                  key: _cardKey,
-                                  direction: FlipDirection.VERTICAL, // Up/Down Swipe to Flip
-                                  front: FlashcardWidget(
-                                    flashcard: widget.flashcards[_currentIndex], //frontside
-                                    fontColor: Color(0xFF0C2D57),
-                                    color: Color(0xFFFFF5CD), //White side
-                                    borderColor: Colors.black,
-                                  ),
-                                  back: FlashcardWidget(
-                                    flashcard: widget.flashcards[_currentIndex], //backside
-                                    fontColor: Color(0xFFFFF5CD),
-                                    color: Color(0xFF0C2D57), //Blue Side
-                                    borderColor: Colors.transparent,
-                                  ),
+                      child: SizedBox(//Size for PageView 
+                        width: 933, 
+                        height: 550, 
+                        child: PageView.builder(
+                          controller: _pageController,
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentIndex = index; //Update the current index
+                            });
+                          },
+                          itemCount: widget.flashcards.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 40.0),
+                              child: FlipCard(
+                                key: GlobalKey<FlipCardState>(),
+                                direction: FlipDirection.VERTICAL, // Up/Down Swipe to Flip
+                                front: FlashcardWidget(
+                                  flashcard: widget.flashcards[index], // Front side
+                                  fontColor: Color(0xFF0C2D57),
+                                  color: Color(0xFFFFF5CD), // White side
+                                  borderColor: Colors.black,
+                                ),
+                                back: FlashcardWidget(
+                                  flashcard: widget.flashcards[index], // Back side
+                                  fontColor: Color(0xFFFFF5CD),
+                                  color: Color(0xFF0C2D57), // Blue side
+                                  borderColor: Colors.transparent,
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
+                            );
+                          },
+                        ),
                       ),
-                      
                     ),
-
-                  ]
+                  ],
                 )
               )
             )
@@ -204,8 +170,7 @@ class FlashcardWidget extends StatelessWidget {
           Positioned(
             bottom: 50,
             right: 50,
-
-            child: ElevatedButton( //Change this eventually so that 
+            child: ElevatedButton( 
               onPressed: () async{
               try {
                   final AudioPlayer audioPlayer = AudioPlayer();
@@ -221,33 +186,12 @@ class FlashcardWidget extends StatelessWidget {
                 backgroundColor: Colors.blue, // Button color
               ),
               child: Icon(
-                Icons.volume_up, // Icon inside button
+                Icons.hearing, // Icon inside button
                 color: Colors.white,
-                size: 24,
+                size: 30,
               ),
             ),
-          
           ),
-        
-          // Align(
-          //   alignment: Alignment(0.0, 0.0),
-          //   child: ElevatedButton(
-          //     onPressed: () async{
-          //       final AudioPlayer audioPlayer = AudioPlayer();
-          //       audioPlayer.play(AssetSource('lib/assets/flashcards/sounds/lesson1_Cinco-Sextos.mp3'));//${flashcard.frontSide}.mp3')); // Play the sound
-          //     },
-          //     style: ElevatedButton.styleFrom(
-          //       shape: CircleBorder(),
-          //       padding: EdgeInsets.all(16),
-          //       backgroundColor: Colors.blue, // Button color
-          //     ),
-          //     child: Icon(
-          //       Icons.volume_up, // Icon inside button
-          //       color: Colors.white,
-          //       size: 24,
-          //     ),
-          //   ),
-          // ),
       ]
     );
   }
