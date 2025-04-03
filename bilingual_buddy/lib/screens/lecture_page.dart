@@ -36,7 +36,8 @@ class PDFContainerWidget extends StatelessWidget {
                   color: const Color(0xFFEEEEEE),
                   child: PDFView(
                     filePath: snapshot.data!,
-                    fitPolicy: FitPolicy.BOTH, // Fit the PDF to the container
+                    fitPolicy: FitPolicy.BOTH,
+                    swipeHorizontal: true, // Fit the PDF to the container
                   ),
                 ),
               ),
