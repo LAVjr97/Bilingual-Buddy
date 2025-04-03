@@ -39,8 +39,11 @@ class TXT extends Question{
 
 //This class is what's used to display the questions
 class QuestionsPage extends StatefulWidget{
-  List<Question> listOfQuestions = [MCQ("¿Cómo se escribe un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), TF("asd\n", ["False", "True"], 1)];//, MCQ("¿Cómo se escribe dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se escribe cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)]; //Add the bullshit questions here, use the constructor of MCQ or TF to add questions
-  
+  List<Question> listOfQuestions; //= [MCQ("¿Cómo se escribe un cuarto en inglés?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1), TF("asd\n", ["False", "True"], 1), MCQ("¿Cómo se escribe dos novenos en inglés?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0), MCQ("¿Cómo se escribe cuatro octavos en inglés?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1)]; //Add the bullshit questions here, use the constructor of MCQ or TF to add questions
+  int lessonNum;
+
+  QuestionsPage(this.listOfQuestions, this.lessonNum);
+
   @override
   _QuestionsPage createState() => _QuestionsPage();
 }
@@ -87,6 +90,7 @@ class _QuestionsPage extends State<QuestionsPage>{
             firstTryCorrectAnswers++;
           });
         },
+        lessonNum: widget.lessonNum
       );
     } else {
       
@@ -99,18 +103,19 @@ class _QuestionsPage extends State<QuestionsPage>{
             firstTryCorrectAnswers++;
           });
         },
-
+        lessonNum: widget.lessonNum
         ); //Replace this with whatever the true or false questions are going to be
     }
   }
 }
 
 class TFPage extends StatefulWidget{
+  final int lessonNum;
   final TF question; 
   final VoidCallback onNext;
   final VoidCallback onFirstTryCorrect;
 
-  const TFPage({required this.question, required this.onNext, required this.onFirstTryCorrect, Key? key}) : super(key: key);
+  const TFPage({required this.question, required this.onNext, required this.onFirstTryCorrect, required this.lessonNum, Key? key}) : super(key: key);
   _TFPage createState() => _TFPage();
 }
 
@@ -288,7 +293,7 @@ class _TFPage extends State<TFPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson 1 Exercises"),
+                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48),
                     boxText(widget.question.question),
@@ -304,11 +309,12 @@ class _TFPage extends State<TFPage>{
 }
 
 class MCQPage extends StatefulWidget {
+  final int lessonNum;
   final MCQ question;
   final VoidCallback onNext;
   final VoidCallback onFirstTryCorrect;
 
-  const MCQPage({required this.question, required this.onNext, required this.onFirstTryCorrect, Key? key}) : super(key: key);
+  const MCQPage({required this.question, required this.onNext, required this.onFirstTryCorrect, required this.lessonNum, Key? key}) : super(key: key);
 
   @override
   _MCQPage createState() => _MCQPage();
@@ -489,7 +495,7 @@ class _MCQPage extends State<MCQPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson 1 Exercises"),
+                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
