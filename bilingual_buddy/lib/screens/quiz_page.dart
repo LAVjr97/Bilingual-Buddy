@@ -3,35 +3,39 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dart:math';
 import 'student_info.dart';
+import 'quizhint.dart';
+
 
 class Question{
   String question;
-  
+  String hint;
   //Constructor
-  Question(this.question);
+  Question(this.question, this.hint);
 }
 
-class MCQ extends Question{ //MCQ class
+class MCQ extends Question {
   List<String> answers;
   int correctAnswer;
 
-  //Constructor
-  MCQ(super.question, this.answers, this.correctAnswer); 
+  MCQ(String question, this.answers, this.correctAnswer, String hint)
+      : super(question, hint);
 }
 
-class TF extends Question{ //True or False class
+
+class TF extends Question {
   List<String> answers;
   int correctAnswer;
 
-  //Constructor
-  TF(super.question, this.answers, this.correctAnswer);
+  TF(String question, this.answers, this.correctAnswer, String hint)
+      : super(question, hint);
 }
 
-class TXT extends Question{
+class TXT extends Question {
   List<String> emojis;
   String correctAnswer;
 
-  TXT(super.question, this.emojis, this.correctAnswer);
+  TXT(String question, this.emojis, this.correctAnswer, String hint)
+      : super(question, hint);
 }
 
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
@@ -296,7 +300,7 @@ class _TFPage extends State<TFPage>{
                     backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48),
-                    boxText(widget.question.question),
+                    FlipCardQuizCard(question: widget.question),
                   ]
                 )
               )
@@ -499,7 +503,8 @@ class _MCQPage extends State<MCQPage>{
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
-                    boxText(widget.question.question),
+                    FlipCardQuizCard(question: widget.question),
+                   
                   ]
                 )
               )
