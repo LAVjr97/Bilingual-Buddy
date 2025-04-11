@@ -63,7 +63,7 @@ class _FractionsLecture extends State<FractionsLecture>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(fractionDashBoardPage, "Fraction Lecture"),
+                    backTextMenuBar(context, fractionDashBoardPage, "Fraction Lecture"),
                     buttonPairText('Lessons', fractionLessons, 'Quizzes', fractionQuizzes, x: 0.0, y: -0.25, width: 412, height: 250, spacer: 35,fontSize: 70),
                     buttonText('Flashcards', fractionFlashcards, y: 0.75, width: 412, height: 250, fontSize: 70)
                   ]
