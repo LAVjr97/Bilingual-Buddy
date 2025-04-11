@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lessons_page.dart';
-//import 'package:pdfrx/pdfrx.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
@@ -22,25 +21,20 @@ class PDFContainerWidget extends StatelessWidget {
             return Container(
               width: 1042,
               height: 614,
-              decoration: ShapeDecoration(
-                color: const Color(0xFFEEEEEE),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1),
-                  borderRadius: BorderRadius.circular(84),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(84),
+              
+
+              //child: ClipRRect(
+                //borderRadius: BorderRadius.circular(84),
                 child: Container(
-                  padding: EdgeInsets.all(16), // Add padding to create space around the PDFView
-                  color: const Color(0xFFEEEEEE),
+                  padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
+                  color: const Color(0xFF0C2D57),
                   child: PDFView(
                     filePath: snapshot.data!,
                     fitPolicy: FitPolicy.BOTH,
                     swipeHorizontal: true, // Fit the PDF to the container
                   ),
                 ),
-              ),
+              //),
             );
           } else {
             return Center(child: Text("Failed to load PDF"));

@@ -1,41 +1,42 @@
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lessons_page.dart';
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' hide log;
 import 'student_info.dart';
-import 'quizhint.dart';
+import 'quiz_hint.dart';
 
 
 class Question{
   String question;
   String hint;
+  
   //Constructor
   Question(this.question, this.hint);
 }
 
-class MCQ extends Question {
+class MCQ extends Question{ //MCQ class
   List<String> answers;
   int correctAnswer;
 
-  MCQ(String question, this.answers, this.correctAnswer, String hint)
-      : super(question, hint);
+  //Constructor
+  MCQ(super.question, this.answers, this.correctAnswer, super.hint);
 }
 
-
-class TF extends Question {
+class TF extends Question{ //True or False class
   List<String> answers;
   int correctAnswer;
 
-  TF(String question, this.answers, this.correctAnswer, String hint)
-      : super(question, hint);
+  //Constructor
+  TF(super.question, this.answers, this.correctAnswer, super.hint);
 }
 
-class TXT extends Question {
-  List<String> emojis;
+class TXT extends Question{
+  //List<String> emojis;
   String correctAnswer;
 
-  TXT(String question, this.emojis, this.correctAnswer, String hint)
-      : super(question, hint);
+  //TXT(super.question, this.emojis, this.correctAnswer, super.hint);
+  TXT(super.question, this.correctAnswer, super.hint);
 }
 
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
@@ -96,11 +97,9 @@ class _QuestionsPage extends State<QuestionsPage>{
         },
         lessonNum: widget.lessonNum
       );
-    } else {
-      
-
+    } else if(currentQuestion is TF){
       return TFPage(
-        question: currentQuestion as TF,
+        question: currentQuestion,
         onNext: nextQuestion,
         onFirstTryCorrect: (){
           setState(() {
@@ -108,7 +107,24 @@ class _QuestionsPage extends State<QuestionsPage>{
           });
         },
         lessonNum: widget.lessonNum
-        ); //Replace this with whatever the true or false questions are going to be
+      );
+    } else if(currentQuestion is TXT){
+      return TXTPage(
+        question: currentQuestion, 
+        onNext: nextQuestion, 
+        onFirstTryCorrect: (){
+          setState(() {
+            firstTryCorrectAnswers++;
+          });
+        },
+        lessonNum: widget.lessonNum
+      );
+    } else {
+      return Scaffold(
+        body: Center(
+        child: Text('Error'),
+      ),
+    );
     }
   }
 }
@@ -504,7 +520,6 @@ class _MCQPage extends State<MCQPage>{
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
                     FlipCardQuizCard(question: widget.question),
-                   
                   ]
                 )
               )
@@ -567,11 +582,12 @@ class _ResultsPage extends State<ResultsPage> {
 }
 
 class TXTPage extends StatefulWidget {
+  final int lessonNum;
   final TXT question;
   final VoidCallback onNext;
   final VoidCallback onFirstTryCorrect;
 
-  const TXTPage({required this.question, required this.onNext, required this.onFirstTryCorrect, Key? key}) : super(key: key);
+  const TXTPage({required this.question, required this.onNext, required this.onFirstTryCorrect, required this.lessonNum, Key? key}) : super(key: key);
 
   @override
   _TXTPage createState() => _TXTPage();
@@ -579,7 +595,7 @@ class TXTPage extends StatefulWidget {
 
 class _TXTPage extends State<TXTPage> {
   bool isFirstTry = true;
-  late String input;
+  late TextEditingController input = TextEditingController();
 
   void fractionQuizzes(){
     Navigator.pushReplacement( 
@@ -602,7 +618,7 @@ class _TXTPage extends State<TXTPage> {
     );  
   }
 
-    void leaveQuiz() async{
+  void leaveQuiz() async{
     showCustomDialog(
       context,
       "Are You Sure You Want to Quit?",
@@ -695,8 +711,22 @@ class _TXTPage extends State<TXTPage> {
     );
   }
   
-  void checkAnswer(){
-    if(widget.question.correctAnswer == input){
+  void checkAnswer(){    
+  //normalize the strings so they're both lowercase
+  String normalizedCorrectAnswer = widget.question.correctAnswer.toLowerCase().trim();
+  String normalizedInput = input.text.toLowerCase().trim();
+
+  //replave "-" with spaces in both strings
+  normalizedCorrectAnswer = normalizedCorrectAnswer.replaceAll('-', ' ');
+  normalizedInput = normalizedInput.replaceAll('-', ' ');
+
+  //replace spaces with nothing in both strings
+  normalizedCorrectAnswer = normalizedCorrectAnswer.replaceAll(' ', '');
+  normalizedInput = normalizedInput.replaceAll(' ', '');
+
+  //log("$normalizedCorrectAnswer and $normalizedInput");
+  
+  if(normalizedCorrectAnswer == normalizedInput){
       correct();
     } else{
       incorrect();
@@ -715,8 +745,12 @@ class _TXTPage extends State<TXTPage> {
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
+
                     backTextMenuBar(context, leaveQuiz, "Lesson 1 Exercises"),
-                    boxText(widget.question.question),
+                    boxText(widget.question.question, x: 0.0, y: -0.05, width: 1133, height: 412),
+                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
+                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
+
                   ]
                 )
               )
