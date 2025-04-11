@@ -8,8 +8,6 @@ class Student{
 
   Student({required this.info, required this.quizCompletion});
 
-
-
   factory Student.fromFirebase(Map<String, dynamic> data) {
     return Student(
       info: StudentInfo(
@@ -23,9 +21,29 @@ class Student{
     );
   }
 
-  toJson(){
+  // Student.fromJson(Map<String, Object?> json)
+  //   : this(
+  //     info: StudentInfo(json['studentId']! as int, json['firstName']! as String, json['lastName']! as String),
+  //     quizCompletion: QuizCompletion(List<bool>.from(json['completedQuizzes'] as List<dynamic>))
+  //   );
+
+  factory Student.fromJson(Map<String, Object?> json) {
+    return Student(
+      info: StudentInfo(
+        json['studentID'] as int,
+        json['firstName'] as String,
+        json['lastName'] as String,
+      ),
+      quizCompletion: QuizCompletion(
+        List<bool>.from(json['completedQuizzes'] as List<dynamic>),
+      ),
+    );
+  }
+
+
+  Map<String, Object?> toJson(){
     return{
-      "completedQuizzes": [false, false, false],
+      "completedQuizzes": [false, false, false], //Will be <"completedQuizzes": quizCompletion.completedQuizzes,> eventually
       "studentID": info.studentId,
       "firstName": info.firstName,
       "lastName": info.lastName,

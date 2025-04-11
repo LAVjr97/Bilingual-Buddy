@@ -172,7 +172,7 @@ class FlashcardWidget extends StatelessWidget {
             right: 50,
             child: ElevatedButton( 
               onPressed: () async{
-              try {
+                try {
                   final AudioPlayer audioPlayer = AudioPlayer();
                   audioPlayer.setVolume(1.0);
                   await audioPlayer.play(AssetSource('flashcards/sounds/lesson1_${flashcard.frontSide}.mp3'));
