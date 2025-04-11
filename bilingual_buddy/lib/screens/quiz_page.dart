@@ -3,39 +3,38 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dart:math';
 import 'student_info.dart';
-import 'quizhint.dart';
+import 'quiz_hint.dart';
 
 
 class Question{
   String question;
   String hint;
+  
   //Constructor
   Question(this.question, this.hint);
 }
 
-class MCQ extends Question {
+class MCQ extends Question{ //MCQ class
   List<String> answers;
   int correctAnswer;
 
-  MCQ(String question, this.answers, this.correctAnswer, String hint)
-      : super(question, hint);
+  //Constructor
+  MCQ(super.question, this.answers, this.correctAnswer, super.hint);
 }
 
-
-class TF extends Question {
+class TF extends Question{ //True or False class
   List<String> answers;
   int correctAnswer;
 
-  TF(String question, this.answers, this.correctAnswer, String hint)
-      : super(question, hint);
+  //Constructor
+  TF(super.question, this.answers, this.correctAnswer, super.hint);
 }
 
-class TXT extends Question {
+class TXT extends Question{
   List<String> emojis;
   String correctAnswer;
 
-  TXT(String question, this.emojis, this.correctAnswer, String hint)
-      : super(question, hint);
+  TXT(super.question, this.emojis, this.correctAnswer, super.hint);
 }
 
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
@@ -499,12 +498,12 @@ class _MCQPage extends State<MCQPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
+                    //Have the questions in default to english, with a button that acts as a hint to switch the questions to spanish
                     backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
                     FlipCardQuizCard(question: widget.question),
-                   
                   ]
                 )
               )

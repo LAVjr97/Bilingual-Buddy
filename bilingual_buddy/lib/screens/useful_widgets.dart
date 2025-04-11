@@ -46,6 +46,18 @@ class ArrowPainter extends CustomPainter {
   }
 }
 
+Widget leftArrowButton(VoidCallback onPressed){
+  return IconButton(
+    onPressed: onPressed,
+    icon: Icon(
+      Icons.arrow_back_ios_new, // Icon inside button
+      color: Color(0xD50C2D57),
+      size: 80,
+      weight: 0.8
+    ), 
+  );
+}
+
 
 Widget emojiText(String topEmoji, String bottomText, double width, double fontSize){
   width = width - 50;
@@ -318,12 +330,7 @@ Widget backTextMenuBar(VoidCallback pressed, String label, [double x = 0.0, doub
       child:Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Transform.rotate( //Back button
-            angle: -1.57,
-            child: CustomArrowButton(
-              onPressed: pressed,
-            )
-          ),
+          leftArrowButton(pressed),
 
           SizedBox( //Adds space between the arrow and the label
             width: 50,
