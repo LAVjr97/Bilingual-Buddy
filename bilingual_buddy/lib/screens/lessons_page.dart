@@ -68,7 +68,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         buttonText('4', () => quiz([MCQ("How do you write 2/3 in English?", ["Two-Thirds", "Two-Fifths", "Two-Sevenths"], 0, "hint"), TF("Three-fourths is larger than one-half.\n", ["True", "False"], 0, "hint"), MCQ("Which fraction is equivalent to 6/8?", ["Three-Fourths", "One-Half", "Two-Thirds"], 0, "hint"), TF("One-fifth is larger than one-fourth.\n", ["True", "False"], 1, "hint")], 4), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
-                        buttonText('5', () => quiz([MCQ("How do you write 3/10 in English?", ["Three-Tenths", "Three-Fifths", "Three-Halves"], 0, "hint"), TF("One-third is equal to three-tenths.\n", ["True", "False"], 1, "hint"), MCQ("Which fraction is closest to one?", ["Nine-Tenths", "One-Half", "One-Fourth"], 0, "hint"), TF("Four-eighths is equivalent to one-half.\n", ["True", "False"], 1, "hint")], 5), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('5', () => quiz([TXT("How do you write\n3/8\nin English?", "Three-Eighths", "Como se escribe 3/8 en ingles?")], 5), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
                         buttonText('+', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
                       ],
                     )
@@ -139,7 +139,7 @@ class _FractionsLessons extends State<FractionsLessons>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('1', () => lecturePage("lib/assets/lessons/Senior_Design.pdf"), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('1', () => lecturePage("assets/lessons/Senior_Design.pdf"), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],
