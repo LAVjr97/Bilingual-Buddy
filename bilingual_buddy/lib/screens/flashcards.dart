@@ -68,7 +68,7 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(fractionsLecture, "Lesson 1 Exercises"),
+                    backTextMenuBar(context, fractionsLecture, "Lesson 1 Exercises"),
                     Align(
                       alignment: Alignment(0.0, 0.5),
                       child: SizedBox(//Size for PageView 

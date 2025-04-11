@@ -99,7 +99,7 @@ class _LessonPage extends State<LessonPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(fractionLessons, "Lesson"),
+                    backTextMenuBar(context, fractionLessons, "Lesson"),
                     Align(
                       alignment: Alignment(0.0, 0.8),
                       child: PDFContainerWidget(

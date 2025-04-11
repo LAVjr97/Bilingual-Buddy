@@ -313,7 +313,7 @@ class _TFPage extends State<TFPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
+                    backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48),
                     FlipCardQuizCard(question: widget.question),
@@ -515,8 +515,7 @@ class _MCQPage extends State<MCQPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    //Have the questions in default to english, with a button that acts as a hint to switch the questions to spanish
-                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
+                    backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
@@ -746,10 +745,8 @@ class _TXTPage extends State<TXTPage> {
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
-                    boxText(widget.question.question, x: 0.0, y: -0.05, width: 1133, height: 412),
-                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
-                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
+                    backTextMenuBar(context, leaveQuiz, "Lesson 1 Exercises"),
+                    boxText(widget.question.question),
                   ]
                 )
               )
