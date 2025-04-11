@@ -745,8 +745,12 @@ class _TXTPage extends State<TXTPage> {
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
+
                     backTextMenuBar(context, leaveQuiz, "Lesson 1 Exercises"),
-                    boxText(widget.question.question),
+                    boxText(widget.question.question, x: 0.0, y: -0.05, width: 1133, height: 412),
+                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
+                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
+
                   ]
                 )
               )
