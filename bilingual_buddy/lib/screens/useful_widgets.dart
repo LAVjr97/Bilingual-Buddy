@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'profile_page.dart';
+import 'login_page.dart';
+
 
 class CustomArrowButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -309,7 +312,7 @@ Widget buttonPairEmojiText(String leftTopEmoji, String leftBottomText, VoidCallb
 }
 
 
-Widget backTextMenuBar(VoidCallback pressed, String label, [double x = 0.0, double y = -0.85]){
+Widget backTextMenuBar(BuildContext context, VoidCallback pressed, String label, [double x = 0.0, double y = -0.85]) { //A row of widgets, back button labeled as fraction, and 3 stack button
   return Align( //A row of widgets, back button labeled as fraction, and 3 stack button
     alignment: Alignment(x, y), 
     child: SizedBox( 
@@ -344,11 +347,10 @@ Widget backTextMenuBar(VoidCallback pressed, String label, [double x = 0.0, doub
             )
           ), 
           Spacer(),
-          menuButton() //3 stack button
-        ]
-      )
-    )
-  
+          menuButton(context), //3 stack button
+        ],
+      ),
+    ),
   );
 }
 
@@ -493,14 +495,64 @@ void showCustomDialog(BuildContext context, String title, List<Widget> actions, 
     );
   }
 
-Widget menuButton(){
-  return Align(
-    alignment: Alignment(0.0, 0.0),
-    child: SvgPicture.asset(
-      'lib/assets/images/menu_button.svg',
-      width: 102,
-      height: 78,
-    )
+
+
+Widget menuButton(BuildContext context){
+  return StatefulBuilder(
+    builder:(BuildContext context, StateSetter setState){
+      bool isHovered = false;
+      return StatefulBuilder(
+        builder: (context, innerSetState){
+          return Align(
+            alignment: Alignment(0.0, 0.0),
+            child: MouseRegion(
+              onEnter: (_) => innerSetState(() => isHovered = true),
+              onExit: (_) => innerSetState(() => isHovered = false),
+              child: PopupMenuButton<String>(
+                splashRadius: 1,
+                padding: EdgeInsets.zero,
+                offset: Offset(0, 50),
+                color: Colors.white,
+                onSelected: (value){
+                  if (value == 'Profile') {
+                    // Sends user to the profile screen
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => ProfilePage()), //fix both profilescreen and loginscreen to point to the correct spot
+                      );
+                  } else if (value == 'Sign Out') {
+                    // Signs the user out
+                    Navigator.pushReplacement(
+                      context, 
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem<String>(
+                      value: 'Profile',
+                      child: Text('Profile'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Sign Out',
+                      child: Text('Sign Out'),
+                    ),
+                  ];
+                },
+                child: SvgPicture.asset(
+                  isHovered
+                    ? 'lib/assets/images/hover_menu_button.svg'
+                    : 'lib/assets/images/menu_button.svg',
+                  width: 102,
+                  height: 78,
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
   );
 }
 

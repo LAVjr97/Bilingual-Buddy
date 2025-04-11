@@ -52,7 +52,7 @@ class _FractionsLectureQuiz extends State<FractionsLectureQuiz>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                  backTextMenuBar(dashBoardPage, "Fraction"),
+                  backTextMenuBar(context, dashBoardPage, "Fraction"),
                   buttonPairEmojiText('📖', 'Lecture', fractionsLecturePage, '📝', 'Quiz', fractionsQuizPage)
                   ]
                 )

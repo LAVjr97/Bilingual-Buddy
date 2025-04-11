@@ -297,7 +297,7 @@ class _TFPage extends State<TFPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
+                    backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48),
                     FlipCardQuizCard(question: widget.question),
@@ -499,7 +499,7 @@ class _MCQPage extends State<MCQPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
+                    backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
                     buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
                     buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
@@ -715,7 +715,7 @@ class _TXTPage extends State<TXTPage> {
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson 1 Exercises"),
+                    backTextMenuBar(context, leaveQuiz, "Lesson 1 Exercises"),
                     boxText(widget.question.question),
                   ]
                 )
