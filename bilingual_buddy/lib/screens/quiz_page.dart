@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lessons_page.dart';
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' hide log;
 import 'student_info.dart';
 import 'quiz_hint.dart';
 
@@ -31,10 +32,11 @@ class TF extends Question{ //True or False class
 }
 
 class TXT extends Question{
-  List<String> emojis;
+  //List<String> emojis;
   String correctAnswer;
 
-  TXT(super.question, this.emojis, this.correctAnswer, super.hint);
+  //TXT(super.question, this.emojis, this.correctAnswer, super.hint);
+  TXT(super.question, this.correctAnswer, super.hint);
 }
 
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
@@ -95,11 +97,9 @@ class _QuestionsPage extends State<QuestionsPage>{
         },
         lessonNum: widget.lessonNum
       );
-    } else {
-      
-
+    } else if(currentQuestion is TF){
       return TFPage(
-        question: currentQuestion as TF,
+        question: currentQuestion,
         onNext: nextQuestion,
         onFirstTryCorrect: (){
           setState(() {
@@ -107,7 +107,24 @@ class _QuestionsPage extends State<QuestionsPage>{
           });
         },
         lessonNum: widget.lessonNum
-        ); //Replace this with whatever the true or false questions are going to be
+      );
+    } else if(currentQuestion is TXT){
+      return TXTPage(
+        question: currentQuestion, 
+        onNext: nextQuestion, 
+        onFirstTryCorrect: (){
+          setState(() {
+            firstTryCorrectAnswers++;
+          });
+        },
+        lessonNum: widget.lessonNum
+      );
+    } else {
+      return Scaffold(
+        body: Center(
+        child: Text('Error'),
+      ),
+    );
     }
   }
 }
@@ -566,11 +583,12 @@ class _ResultsPage extends State<ResultsPage> {
 }
 
 class TXTPage extends StatefulWidget {
+  final int lessonNum;
   final TXT question;
   final VoidCallback onNext;
   final VoidCallback onFirstTryCorrect;
 
-  const TXTPage({required this.question, required this.onNext, required this.onFirstTryCorrect, Key? key}) : super(key: key);
+  const TXTPage({required this.question, required this.onNext, required this.onFirstTryCorrect, required this.lessonNum, Key? key}) : super(key: key);
 
   @override
   _TXTPage createState() => _TXTPage();
@@ -578,7 +596,7 @@ class TXTPage extends StatefulWidget {
 
 class _TXTPage extends State<TXTPage> {
   bool isFirstTry = true;
-  late String input;
+  late TextEditingController input = TextEditingController();
 
   void fractionQuizzes(){
     Navigator.pushReplacement( 
@@ -601,7 +619,7 @@ class _TXTPage extends State<TXTPage> {
     );  
   }
 
-    void leaveQuiz() async{
+  void leaveQuiz() async{
     showCustomDialog(
       context,
       "Are You Sure You Want to Quit?",
@@ -694,8 +712,22 @@ class _TXTPage extends State<TXTPage> {
     );
   }
   
-  void checkAnswer(){
-    if(widget.question.correctAnswer == input){
+  void checkAnswer(){    
+  //normalize the strings so they're both lowercase
+  String normalizedCorrectAnswer = widget.question.correctAnswer.toLowerCase().trim();
+  String normalizedInput = input.text.toLowerCase().trim();
+
+  //replave "-" with spaces in both strings
+  normalizedCorrectAnswer = normalizedCorrectAnswer.replaceAll('-', ' ');
+  normalizedInput = normalizedInput.replaceAll('-', ' ');
+
+  //replace spaces with nothing in both strings
+  normalizedCorrectAnswer = normalizedCorrectAnswer.replaceAll(' ', '');
+  normalizedInput = normalizedInput.replaceAll(' ', '');
+
+  //log("$normalizedCorrectAnswer and $normalizedInput");
+  
+  if(normalizedCorrectAnswer == normalizedInput){
       correct();
     } else{
       incorrect();
@@ -714,8 +746,10 @@ class _TXTPage extends State<TXTPage> {
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(leaveQuiz, "Lesson 1 Exercises"),
-                    boxText(widget.question.question),
+                    backTextMenuBar(leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
+                    boxText(widget.question.question, x: 0.0, y: -0.05, width: 1133, height: 412),
+                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
+                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
                   ]
                 )
               )

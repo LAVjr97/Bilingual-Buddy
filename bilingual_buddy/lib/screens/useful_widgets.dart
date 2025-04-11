@@ -511,3 +511,53 @@ Widget menuButton(){
   );
 }
 
+Widget boxInput(TextEditingController inputController, String hint, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor, int? textColor}){
+  x ??= -0.85;
+  y ??= 0.85;
+
+  width ??= 562;
+  height ??= 91;
+
+  fontSize ??= 48;
+  boxColor ??= 0xFFFFF5CD;
+  textColor ??= 0xFF0C2D57;
+
+  return Align( //Username input field (using align because its convenient)
+    alignment: Alignment(x, y),
+    child: Container(
+      width: width,
+      height: height,
+      decoration: ShapeDecoration(
+        color: Color(boxColor),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1),
+          borderRadius: BorderRadius.circular(84),
+        ),
+      ),
+
+      child:Padding(
+        padding: EdgeInsets.symmetric(vertical: 17), //Horizonal adds padding to the left of the hint text
+        child: TextField(
+          controller: inputController,
+          textAlign: TextAlign.center,
+          style: TextStyle(           //Actual input text
+            color: Color(textColor),// Color(0xFF0C2D57),
+            fontSize: fontSize,
+            fontFamily: 'Outfit',
+            fontWeight: FontWeight.w800,
+          ),
+          decoration: InputDecoration( //"hint" text
+            border: InputBorder.none,
+            hintText: hint,
+            hintStyle: TextStyle(
+              color: Color(textColor),
+              fontSize: fontSize,
+              fontFamily: 'Outfit',
+              fontWeight: FontWeight.w800,
+            )
+          ),
+        )
+      ),
+    ),
+  );
+}
