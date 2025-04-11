@@ -55,7 +55,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(fractionDashBoardPage, "Fraction Quizzes"),
+                    backTextMenuBar(context, fractionDashBoardPage, "Fraction Quizzes"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -135,7 +135,7 @@ class _FractionsLessons extends State<FractionsLessons>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(fractionDashBoardPage, "Fraction Lessons"),
+                    backTextMenuBar(context, fractionDashBoardPage, "Fraction Lessons"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
