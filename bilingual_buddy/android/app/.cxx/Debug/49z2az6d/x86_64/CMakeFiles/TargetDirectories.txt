@@ -1,0 +1,2 @@
+C:/Code/senior-design-project-02_alfa_talktogether/bilingual_buddy/android/app/.cxx/Debug/49z2az6d/x86_64/CMakeFiles/edit_cache.dir
+C:/Code/senior-design-project-02_alfa_talktogether/bilingual_buddy/android/app/.cxx/Debug/49z2az6d/x86_64/CMakeFiles/rebuild_cache.dir

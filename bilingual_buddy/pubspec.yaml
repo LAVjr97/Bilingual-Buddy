@@ -72,6 +72,10 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+  - assets/images/
+  - assets/flashcards/sounds/
+  - assets/flashcards/
+  - assets/lessons/
 
   - lib/assets/images/
   - lib/assets/flashcards/sounds/
