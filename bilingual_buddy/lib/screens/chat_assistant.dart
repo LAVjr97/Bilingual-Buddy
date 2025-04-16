@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class ChatAssistant extends StatefulWidget {
   const ChatAssistant({Key? key}) : super(key: key);
@@ -28,7 +30,11 @@ class _ChatAssistantState extends State<ChatAssistant> {
 
     _controller.clear();
 
-    final apiKey = "***REMOVED***95KGxJeqQwlI2PlHF4HRI4ZETednmc-g9ZagqqZBQlsHU2OidoVnxra-OxBxX27isSYEEDWfwKT3BlbkFJJ95a4sFvcVtb4WdlLoqGAGYSsSlwv9wzPF7PGeEEKWC5FEk4dQqwrXj0otfLWo8Jlk-NmXOoYA"; // 🔐 Replace this later
+
+
+    final apiKey = dotenv.env['OPENAI_API_KEY']!;
+
+
 
     final response = await http.post(
       Uri.parse("https://api.openai.com/v1/chat/completions"),
