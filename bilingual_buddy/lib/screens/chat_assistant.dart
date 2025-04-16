@@ -1,0 +1,133 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class ChatAssistant extends StatefulWidget {
+  const ChatAssistant({Key? key}) : super(key: key);
+
+  @override
+  State<ChatAssistant> createState() => _ChatAssistantState();
+}
+
+class _ChatAssistantState extends State<ChatAssistant> {
+  final TextEditingController _controller = TextEditingController();
+  final List<Map<String, String>> _messages = [
+    {
+      "role": "system",
+      "content":
+      "You are a friendly language tutor for Spanish-speaking children who are learning English. Keep replies short, fun, and explain words in both English and Spanish."
+    }
+  ];
+  bool _isSending = false;
+
+  Future<void> sendMessage(String message) async {
+    setState(() {
+      _messages.add({"role": "user", "content": message});
+      _isSending = true;
+    });
+
+    _controller.clear();
+
+    final apiKey = "***REMOVED***95KGxJeqQwlI2PlHF4HRI4ZETednmc-g9ZagqqZBQlsHU2OidoVnxra-OxBxX27isSYEEDWfwKT3BlbkFJJ95a4sFvcVtb4WdlLoqGAGYSsSlwv9wzPF7PGeEEKWC5FEk4dQqwrXj0otfLWo8Jlk-NmXOoYA"; // 🔐 Replace this later
+
+    final response = await http.post(
+      Uri.parse("https://api.openai.com/v1/chat/completions"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $apiKey",
+      },
+      body: jsonEncode({
+        "model": "gpt-3.5-turbo",
+        "messages": _messages,
+        "temperature": 0.7,
+      }),
+    );
+
+    final data = jsonDecode(response.body);
+    final reply = data["choices"][0]["message"]["content"];
+
+    setState(() {
+      _messages.add({"role": "assistant", "content": reply});
+      _isSending = false;
+    });
+  }
+
+  void openChatPanel(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      builder: (_) => DraggableScrollableSheet(
+        expand: false,
+        builder: (_, scrollController) => Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Text("Bilingual Buddy 👋",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    final msg = _messages[index];
+                    final isUser = msg['role'] == 'user';
+                    return Container(
+                      margin: EdgeInsets.symmetric(vertical: 4),
+                      alignment:
+                      isUser ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        constraints: BoxConstraints(
+                            maxWidth:
+                            MediaQuery.of(context).size.width * 0.75),
+                        decoration: BoxDecoration(
+                          color: isUser
+                              ? Colors.lightBlue[100]
+                              : Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(msg['content'] ?? ""),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              if (_isSending) CircularProgressIndicator(),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration:
+                      InputDecoration(hintText: "Ask me anything..."),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: _controller.text.trim().isEmpty
+                        ? null
+                        : () => sendMessage(_controller.text.trim()),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 24,
+      right: 24,
+      child: FloatingActionButton(
+        onPressed: () => openChatPanel(context),
+        child: Icon(Icons.chat),
+        tooltip: "Ask Bilingual Buddy!",
+      ),
+    );
+  }
+}

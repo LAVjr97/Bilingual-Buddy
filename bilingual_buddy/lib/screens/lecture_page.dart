@@ -6,6 +6,9 @@ import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+// 👇 Import the chat assistant
+import 'chat_assistant.dart';
+
 class PDFContainerWidget extends StatelessWidget {
   final String pdfPath;
 
@@ -21,20 +24,13 @@ class PDFContainerWidget extends StatelessWidget {
             return Container(
               width: 1042,
               height: 614,
-              
-
-              //child: ClipRRect(
-                //borderRadius: BorderRadius.circular(84),
-                child: Container(
-                  padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
-                  color: const Color(0xFF0C2D57),
-                  child: PDFView(
-                    filePath: snapshot.data!,
-                    fitPolicy: FitPolicy.BOTH,
-                    swipeHorizontal: true, // Fit the PDF to the container
-                  ),
-                ),
-              //),
+              padding: EdgeInsets.all(20),
+              color: const Color(0xFF0C2D57),
+              child: PDFView(
+                filePath: snapshot.data!,
+                fitPolicy: FitPolicy.BOTH,
+                swipeHorizontal: true,
+              ),
             );
           } else {
             return Center(child: Text("Failed to load PDF"));
@@ -55,7 +51,7 @@ class PDFContainerWidget extends StatelessWidget {
   }
 }
 
-class LessonPage extends StatefulWidget{ 
+class LessonPage extends StatefulWidget {
   final String pdfPath;
 
   const LessonPage({required this.pdfPath});
@@ -64,11 +60,12 @@ class LessonPage extends StatefulWidget{
   _LessonPage createState() => _LessonPage();
 }
 
-class _LessonPage extends State<LessonPage>{
-  void fractionLessons(){
-    Navigator.pushReplacement( 
-      context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => FractionsLessons(), 
+class _LessonPage extends State<LessonPage> {
+  void fractionLessons() {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsLessons(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
@@ -82,19 +79,19 @@ class _LessonPage extends State<LessonPage>{
             child: child,
           );
         },
-      )
-    );  
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, //makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
             Expanded(
-              child: Container( //Screen borders for the background color
+              child: Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
@@ -102,17 +99,17 @@ class _LessonPage extends State<LessonPage>{
                     backTextMenuBar(context, fractionLessons, "Lesson"),
                     Align(
                       alignment: Alignment(0.0, 0.8),
-                      child: PDFContainerWidget(
-                        pdfPath: widget.pdfPath
-                      )
-                    )
-                  ]
-                )
-              )
-            )
-          ]
-        )
-      )
+                      child: PDFContainerWidget(pdfPath: widget.pdfPath),
+                    ),
+                    // 👇 Add the floating chat assistant button
+                    const ChatAssistant(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
