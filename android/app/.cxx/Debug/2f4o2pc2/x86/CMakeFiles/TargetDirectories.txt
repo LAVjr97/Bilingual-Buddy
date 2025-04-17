@@ -1,0 +1,2 @@
+C:/Users/ekamn/Bilingual-Buddy/bilingual_buddy/android/app/.cxx/Debug/2f4o2pc2/x86/CMakeFiles/edit_cache.dir
+C:/Users/ekamn/Bilingual-Buddy/bilingual_buddy/android/app/.cxx/Debug/2f4o2pc2/x86/CMakeFiles/rebuild_cache.dir
