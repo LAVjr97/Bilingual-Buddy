@@ -34,6 +34,11 @@ class _DashBoardState extends State<DashboardScreen>{
                 child: Stack(
                   children: [
                     Positioned(
+                      top: 16.0, //aligning the menu button to the top right of the screen
+                      right: 16.0,
+                      child: menuButton(context),
+                    ),
+                    Positioned(
                       left: 253,
                       top: 1076,
                       child: Container(
