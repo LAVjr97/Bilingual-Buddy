@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'dart:math' hide log;
 import 'student_info.dart';
 import 'quiz_hint.dart';
+import 'package:confetti/confetti.dart';
 
 
 class Question{
@@ -37,6 +38,12 @@ class TXT extends Question{
 
   //TXT(super.question, this.emojis, this.correctAnswer, super.hint);
   TXT(super.question, this.correctAnswer, super.hint);
+}
+
+class MATCH_TILES extends Question{
+  List<String> buttonText; //MATCH_TILES("<Question>", ["One-Fifth", "1/5", "Two-Thirds", "2/3"], "<Pregunta>"), where buttonText is the pairs of buttons that will be shown on the screen, which should be 8
+
+  MATCH_TILES(super.question, this.buttonText, super.hint);
 }
 
 //"super" keyword calls the constructor of the parent class, which is "Question" and initilizes the question 
@@ -110,6 +117,17 @@ class _QuestionsPage extends State<QuestionsPage>{
       );
     } else if(currentQuestion is TXT){
       return TXTPage(
+        question: currentQuestion, 
+        onNext: nextQuestion, 
+        onFirstTryCorrect: (){
+          setState(() {
+            firstTryCorrectAnswers++;
+          });
+        },
+        lessonNum: widget.lessonNum
+      );
+    } else if(currentQuestion is MATCH_TILES){
+      return MATCH_TILESPage(
         question: currentQuestion, 
         onNext: nextQuestion, 
         onFirstTryCorrect: (){
@@ -542,16 +560,41 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPage extends State<ResultsPage> {
+  late ConfettiController _rightConfettiController;
+  late ConfettiController _leftConfettiController;
+
   void fractionQuizzes() async{
     Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => FractionsQuizzes())); 
   }
 
   @override
+  void initState() {
+    super.initState();
+    _rightConfettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _leftConfettiController = ConfettiController(duration: const Duration(seconds: 3));
+
+  }
+
+  @override
+  void dispose() {
+    _rightConfettiController.dispose();
+    _leftConfettiController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     String text;
     if(widget.correctAnswers >= 1){
-      text = "You got ${widget.correctAnswers} of ${widget.totalQuestions} correct on your first try!";
+      if(widget.correctAnswers == widget.totalQuestions){
+        text = "You got ALL ${widget.totalQuestions} questions correct on your first try!";
+        _rightConfettiController.play();
+        _leftConfettiController.play();
+      }else{
+        text = "You got ${widget.correctAnswers} of ${widget.totalQuestions} correct on your first try!";
+      }
     } else {
       text = "You got none correct on your first try.";
     }
@@ -569,7 +612,37 @@ class _ResultsPage extends State<ResultsPage> {
                 child: Stack(
                   children: [
                     boxText(text, x: 0.0, y: -0.2, width: 733, height: 450, fontSize: 80),
-                    buttonText("Back to Quizzes", fractionQuizzes, x: 0.0, y: 0.75, width: 350, height: 90, fontSize: 40)
+                    buttonText("Back to Quizzes", fractionQuizzes, x: 0.0, y: 0.75, width: 350, height: 90, fontSize: 40),
+                    Align(
+                      alignment: Alignment(0.9, -0.95),
+                      child: ConfettiWidget(
+                        confettiController: _leftConfettiController,
+                        blastDirection: pi / 2, 
+                        blastDirectionality: BlastDirectionality.directional,
+                        shouldLoop: false,
+                        maxBlastForce: 20,
+                        minBlastForce: 5,
+                        emissionFrequency: 0.05,
+                        numberOfParticles: 15,
+                        gravity: 0.3,
+                        //Colors: const [Colors.red], we can set the confetti to a certain color here
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment(-0.9, -0.95),
+                      child: ConfettiWidget(
+                        confettiController: _rightConfettiController,
+                        blastDirection: pi / 2, 
+                        blastDirectionality: BlastDirectionality.directional,
+                        shouldLoop: false,
+                        maxBlastForce: 20,
+                        minBlastForce: 5,
+                        emissionFrequency: 0.05,
+                        numberOfParticles: 15,
+                        gravity: 0.3,
+                        //Colors: const [Colors.red], we can set the confetti to a certain color here
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -751,6 +824,208 @@ class _TXTPage extends State<TXTPage> {
                     boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
                     buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
 
+                  ]
+                )
+              )
+            )
+          ]
+        )
+      )
+    );
+  }
+}
+
+class matchButton {
+  final int pairID;
+  final String text;
+  bool matched;
+
+  matchButton({required this.pairID, required this.text, this.matched = false});
+}
+
+class MATCH_TILESPage extends StatefulWidget{
+  final int lessonNum;
+  final MATCH_TILES question;
+  final VoidCallback onNext;
+  final VoidCallback onFirstTryCorrect;
+
+  MATCH_TILESPage({required this.question, required this.onNext, required this.onFirstTryCorrect, required this.lessonNum, Key? key}) : super(key: key);
+
+  @override
+  _MATCH_TILESPage createState() => _MATCH_TILESPage();
+}
+
+class _MATCH_TILESPage extends State<MATCH_TILESPage>{
+  late List<matchButton> buttons;
+  int? firstSelectedIndex;
+  Set<int> incorrectIndexes = {};
+  bool isFirstTry = true;
+
+
+  @override
+  void initState() {
+    super.initState();
+    buttons = generateShuffledButtons(widget.question.buttonText.length);
+  }
+
+  void fractionQuizzes(){
+    Navigator.pushReplacement( 
+      context, PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsQuizzes(), 
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(-1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      )
+    );  
+  }
+
+  List<matchButton> generateShuffledButtons(int numberOfPairs) {
+    List<matchButton> buttons = [];
+
+    for (int i = 0; i < widget.question.buttonText.length; i++) {
+      buttons.add(matchButton(pairID: i ~/ 2, text: widget.question.buttonText[i]));
+    }
+
+    buttons.shuffle();
+    return buttons;
+  }
+
+  void handleButtonTap(int index){
+    if(buttons[index].matched || incorrectIndexes.contains(index)) return;
+
+    setState(() {
+      if(incorrectIndexes.isNotEmpty){ //If the answer is incorrect
+        incorrectIndexes.clear();
+      }
+
+      if(firstSelectedIndex == null){ //First tile clicked on
+        firstSelectedIndex = index;
+      } else {
+        final first = buttons[firstSelectedIndex!];
+        final second = buttons[index];
+
+        if(first.pairID == second.pairID && firstSelectedIndex != index) { //Match
+          buttons[firstSelectedIndex!].matched = true;
+          buttons[index].matched = true;
+        } else { //Mismatch, buttons turn red
+          isFirstTry = false;
+          incorrectIndexes.add(firstSelectedIndex!);
+          incorrectIndexes.add(index);
+        }
+
+        //Reset clicked button
+        firstSelectedIndex = null;
+      }
+
+      if(buttons.every((btn) => btn.matched)){
+        completed();
+      }
+
+    });
+  }
+
+  void completed(){
+    if(isFirstTry){
+      widget.onFirstTryCorrect();
+    }
+    showCustomDialogEmoji(
+      context,
+      "Correct!",
+      "✅✅✅",
+      [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            widget.onNext(); //This calls for the next question
+          },
+          child: Text(
+            "Next",
+            style: TextStyle(
+              color: Color(0xFF0C2D57),
+              fontSize: 36,
+              fontFamily: 'Outfit',
+              fontWeight: FontWeight.w800,
+            )
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      resizeToAvoidBottomInset: false, //makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Container( //Screen borders for the background color
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                child: Stack(
+                  children: [
+                    backTextMenuBar(context, fractionQuizzes, "Fraction Quizzes"),
+                     Align(
+                      alignment: Alignment(0.0, 0.6),
+                      child: SizedBox(
+                        width: 900,
+                        height: 500,
+                        child: GridView.count(
+                          crossAxisCount: 4,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          padding: const EdgeInsets.all(12),
+                          children: List.generate(buttons.length, (index) {
+                            final button = buttons[index];    
+                            final bool isMatched = button.matched;
+                            final bool isIncorrect = incorrectIndexes.contains(index);
+                            final bool isSelected = firstSelectedIndex == index;                            
+                            
+                            Color bgColor;
+                            if(isMatched){
+                              bgColor = Colors.green;
+                            } else if(isIncorrect){
+                              bgColor = Colors.red;
+                            } else if(isSelected){
+                              bgColor = Colors.orange; 
+                            } else {
+                              bgColor = Color(0xFFFFF5CD);
+                            }
+
+                            return ElevatedButton(
+                              onPressed: () => handleButtonTap(index),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: bgColor,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(width: 1),
+                                  borderRadius: BorderRadius.circular(84),
+                                ),
+                              ),
+                              child: Text(
+                                buttons[index].text,
+                                style: const TextStyle(
+                                  color: Color(0xFF0C2D57),
+                                  fontSize: 24,
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              )
+                            );
+                          })
+                        )
+                      )
+                    )
                   ]
                 )
               )
