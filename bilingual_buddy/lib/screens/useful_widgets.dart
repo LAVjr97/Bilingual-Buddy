@@ -508,6 +508,7 @@ Widget menuButton(BuildContext context){
   return StatefulBuilder(
     builder:(BuildContext context, StateSetter setState){
       bool isHovered = false;
+
       return StatefulBuilder(
         builder: (context, innerSetState){
           return Align(
@@ -528,10 +529,45 @@ Widget menuButton(BuildContext context){
                       MaterialPageRoute(builder: (context) => ProfilePage()), //fix both profilescreen and loginscreen to point to the correct spot
                       );
                   } else if (value == 'Sign Out') {
-                    // Signs the user out
-                    Navigator.pushReplacement(
-                      context, 
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    // Signs the user out, but also now asks whether or not they want to sign out
+                    showCustomDialog(
+                      context,
+                      "Are You Sure You Want to Sign Out?",
+                      [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginPage()),                              
+                            );
+                          },
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(
+                              color: Color(0xFF0C2D57),
+                              fontSize: 36,
+                              fontFamily: 'Outfit',
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "No",
+                            style: TextStyle(
+                              color: Color(0xFF0C2D57),
+                              fontSize: 36,
+                              fontFamily: 'Outfit',
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   }
                 },
@@ -540,6 +576,14 @@ Widget menuButton(BuildContext context){
                     PopupMenuItem<String>(
                       value: 'Profile',
                       child: Text('Profile'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Settings',
+                      child: Text('Settings'),
+                      //**Mainly a placeholder for now** 
+                      //We can use this to hold a handful of settings options like dark mode, 
+                      // or if we don't have enough settings options we can change the settings button
+                      // to just a dark mode button
                     ),
                     PopupMenuItem<String>(
                       value: 'Sign Out',
