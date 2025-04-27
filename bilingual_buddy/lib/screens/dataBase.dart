@@ -5,7 +5,7 @@ import 'student_info.dart';
 
 const String STUDENTID_COLLECTION_REF = "studentID";
 
-
+/*
 
 class DataBase {
   final _firestore = FirebaseFirestore.instance;
@@ -82,4 +82,4 @@ class DataBase {
       return null;
     }
   }
-}
+} */

@@ -6,6 +6,7 @@ import 'dart:math' hide log;
 import 'student_info.dart';
 import 'quiz_hint.dart';
 import 'package:confetti/confetti.dart';
+import 'globals.dart';
 
 
 class Question{
@@ -76,6 +77,7 @@ class _QuestionsPage extends State<QuestionsPage>{
           builder: (context) => ResultsPage(
             correctAnswers: firstTryCorrectAnswers,
             totalQuestions: widget.listOfQuestions.length,
+            quizNumber: widget.lessonNum,
           ),
         ),
       ); 
@@ -552,8 +554,9 @@ class _MCQPage extends State<MCQPage>{
 class ResultsPage extends StatefulWidget {
   final int correctAnswers;
   final int totalQuestions;
+  final int quizNumber;
 
-  const ResultsPage({required this.correctAnswers, required this.totalQuestions, Key? key}) : super(key: key);
+  const ResultsPage({required this.correctAnswers, required this.totalQuestions, required this.quizNumber, Key? key}) : super(key: key);
 
   @override
   _ResultsPage createState() => _ResultsPage();
@@ -574,6 +577,11 @@ class _ResultsPage extends State<ResultsPage> {
     _rightConfettiController = ConfettiController(duration: const Duration(seconds: 3));
     _leftConfettiController = ConfettiController(duration: const Duration(seconds: 3));
 
+    if(currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].correctAnswers < widget.correctAnswers){
+      currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].correctAnswers = widget.correctAnswers;
+      currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].calculatePercent();
+    }
+    log("Quiz #${widget.quizNumber} completed");
   }
 
   @override

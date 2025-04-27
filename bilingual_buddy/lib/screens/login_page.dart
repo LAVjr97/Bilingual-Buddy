@@ -8,6 +8,7 @@ import 'landing_page.dart';
 import 'useful_widgets.dart';
 import 'student_info.dart';
 import 'dataBase.dart';
+import 'globals.dart';
 
 
 void signOut() async {
@@ -148,7 +149,10 @@ class _LoginPageState extends State<LoginPage> {
     
     if (user != null) {
     //if (student != null){
-      log("Login successful: ${email}");
+      log("Login successful: $email");
+      String uid = user.uid ?? '';
+      currentStudent = students[uid]!;
+      log("Student Name: ${currentStudent.info.firstName} ${currentStudent.info.lastName}");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => DashboardScreen()));
     } else {
