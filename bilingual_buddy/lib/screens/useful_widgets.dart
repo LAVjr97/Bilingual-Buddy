@@ -157,7 +157,7 @@ Widget singleText(String text, double width, double fontSize){
   );
 }
 
-Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, double? width, double? height, double? fontSize}){
+Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, double? width, double? height, double? fontSize, Color? backColor}){
   x ??= 0.0;
   y ??= 0.0;
 
@@ -165,6 +165,8 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
   height ??= 385;
 
   fontSize ??= 75;
+
+  backColor ??= Color(0xFFFFF5CD);
   
   return Align(
     alignment: Alignment(x, y),
@@ -174,7 +176,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
       child: ElevatedButton(
         onPressed: pressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFFFF5CD),
+          backgroundColor: backColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
@@ -656,4 +658,32 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
       ),
     ),
   );
+}
+
+//Useful Functions
+Color getColorForPercentage(double percentage) {
+  percentage = percentage.clamp(0, 100);
+
+  // Define base colors
+  const bronze = Color(0xFFCD7F32);   
+  const silver = Color(0xFFC0C0C0);   
+  const gold   = Color(0xFFFFD700);   
+  const platinum = Color(0xFFE5E4E2); 
+
+  if (percentage < 50) {
+    // 0% → 50%: Bronze solid
+    return bronze;
+  } else if (percentage < 75) {
+    // 50% → 75%: Bronze → Silver
+    double t = (percentage - 50) / 25; // Normalize to 0-1
+    return Color.lerp(bronze, silver, t)!;
+  } else if (percentage < 90) {
+    // 75% → 90%: Silver → Gold
+    double t = (percentage - 75) / 15; // Normalize to 0-1
+    return Color.lerp(silver, gold, t)!;
+  } else {
+    // 90% → 100%: Gold → Platinum
+    double t = (percentage - 90) / 10; // Normalize to 0-1
+    return Color.lerp(gold, platinum, t)!;
+  }
 }
