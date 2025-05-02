@@ -5,8 +5,7 @@ import 'lecture_dashboard.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
-
-
+import 'lessons_page.dart';
 
 class Flashcards {
   String frontSide;
@@ -16,9 +15,10 @@ class Flashcards {
 }
 
 class FlashcardViewer extends StatefulWidget {
-  final List<Flashcards> flashcards = [Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/9"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")];
+  late List<Flashcards> flashcards = [Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/9"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")];
+  final int lessonNum;
 
-  //FlashcardViewer({required this.flashcards});
+  FlashcardViewer({required this.flashcards, required this.lessonNum, Key? key}) : super(key: key);
 
   @override
   _FlashcardViewerState createState() => _FlashcardViewerState();
@@ -37,7 +37,7 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
   void fractionsLecture() async{
         Navigator.pushReplacement( 
       context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => FractionsLecture(), 
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsFlashCards(), 
         transitionsBuilder: (context,  animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
@@ -68,7 +68,7 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(context, fractionsLecture, "Lesson 1 Exercises"),
+                    backTextMenuBar(context, fractionsLecture, "Lesson ${widget.lessonNum} Flashcards"),
                     Align(
                       alignment: Alignment(0.0, 0.5),
                       child: SizedBox(//Size for PageView 

@@ -16,7 +16,6 @@ class _FractionsLecture extends State<FractionsLecture>{
   void fractionLessons() async{
     Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => FractionsLessons()));  
-
   }
 
   void fractionQuizzes() async{
@@ -26,7 +25,7 @@ class _FractionsLecture extends State<FractionsLecture>{
 
   void fractionFlashcards() async{
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => FlashcardViewer()));
+      context, MaterialPageRoute(builder: (context) => FractionsFlashCards()));
   }
 
   void fractionDashBoardPage() async{//This creates a transistion that goes from left to right, where the default is right to left 
