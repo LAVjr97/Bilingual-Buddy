@@ -522,7 +522,11 @@ Widget menuButton(BuildContext context){
                 splashRadius: 1,
                 padding: EdgeInsets.zero,
                 offset: Offset(0, 50),
-                color: Colors.white,
+                color: Color(0xFFFFF5CD), //The following 4 lines change the look of the hamburger menu button
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: Color(0xFF0C2D57), width: 1),
+                ),
                 onSelected: (value){
                   if (value == 'Profile') {
                     // Sends user to the profile screen
