@@ -5,6 +5,11 @@ import 'quiz_page.dart';
 import 'lecture_page.dart';
 import 'games_page.dart';
 import 'globals.dart';
+import 'flashcards.dart';
+
+void tempPage() async{
+  return;
+}
 
 class FractionsQuizzes extends StatefulWidget{
     @override
@@ -12,11 +17,6 @@ class FractionsQuizzes extends StatefulWidget{
 }
 
 class _FractionsQuizzes extends State<FractionsQuizzes>{
-
-  void tempPage() async{
-    return;
-  }
-
   void quiz(List<Question> questions, int num) async{
     Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => QuestionsPage(questions, num))); 
@@ -120,11 +120,6 @@ class FractionsLessons extends StatefulWidget{
 }
 
 class _FractionsLessons extends State<FractionsLessons>{
-
-  void tempPage() async{
-    return;
-  }
-
   void fractionDashBoardPage() async{
     Navigator.pushReplacement( 
       context, PageRouteBuilder(
@@ -148,9 +143,9 @@ class _FractionsLessons extends State<FractionsLessons>{
 
 
   //Senior Design.pdf
-  void lecturePage(String path){
+  void lecturePage(String path, int num){
     Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => LessonPage(pdfPath: path))); 
+      context, MaterialPageRoute(builder: (context) => LessonPage(pdfPath: path, lessonNum: num))); 
   }
 
   @override
@@ -170,7 +165,80 @@ class _FractionsLessons extends State<FractionsLessons>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('1', () => lecturePage("assets/lessons/Senior_Design.pdf"), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('1', () => lecturePage("assets/lessons/Senior_Design.pdf", 1), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buttonText('4', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('5', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('+', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                      ],
+                    )
+                  ]
+                )
+              )
+            )
+          ]
+        )
+      )
+    );
+  }
+}
+
+class FractionsFlashCards extends StatefulWidget{
+  @override
+  _FractionsFlashCards createState() => _FractionsFlashCards();
+}
+
+class _FractionsFlashCards extends State<FractionsFlashCards>{
+  void fractionDashBoardPage() async{
+    Navigator.pushReplacement( 
+      context, PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsLecture(), 
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(-1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      )
+    );  
+  }
+
+  void flashCardPage(List<Flashcards> flashcards, int num){
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => FlashcardViewer(flashcards: flashcards, lessonNum: num,)));
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      resizeToAvoidBottomInset: false, //makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Container( //Screen borders for the background color
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                child: Stack(
+                  children: [
+                    backTextMenuBar(context, fractionDashBoardPage, "Fraction Flashcards"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buttonText('1', () => flashCardPage([Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/9"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")], 1), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                         buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],

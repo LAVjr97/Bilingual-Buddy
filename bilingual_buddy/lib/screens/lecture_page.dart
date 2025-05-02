@@ -57,8 +57,9 @@ class PDFContainerWidget extends StatelessWidget {
 
 class LessonPage extends StatefulWidget{ 
   final String pdfPath;
+  final int lessonNum;
 
-  const LessonPage({required this.pdfPath});
+  const LessonPage({required this.pdfPath, required this.lessonNum, Key? key}) : super(key: key);
 
   @override
   _LessonPage createState() => _LessonPage();
@@ -99,7 +100,7 @@ class _LessonPage extends State<LessonPage>{
                 decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
                 child: Stack(
                   children: [
-                    backTextMenuBar(context, fractionLessons, "Lesson"),
+                    backTextMenuBar(context, fractionLessons, "Lesson ${widget.lessonNum}"),
                     Align(
                       alignment: Alignment(0.0, 0.8),
                       child: PDFContainerWidget(
