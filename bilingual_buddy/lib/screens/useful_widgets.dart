@@ -1,3 +1,4 @@
+import 'package:bilingual_buddy/screens/student_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -533,7 +534,14 @@ Widget menuButton(BuildContext context){
                     // Sends user to the profile screen
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => ProfilePage()), //fix both profilescreen and loginscreen to point to the correct spot
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                          student: Student(
+                            info: StudentInfo(1, "Test", "User"),
+                            quizCompletion: QuizCompletion([true, false, true]),
+                          )
+                        )
+                      ),
                       );
                   } else if (value == 'Sign Out') {
                     // Signs the user out, but also now asks whether or not they want to sign out
@@ -583,14 +591,6 @@ Widget menuButton(BuildContext context){
                     PopupMenuItem<String>(
                       value: 'Profile',
                       child: Text('Profile'),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'Settings',
-                      child: Text('Settings'),
-                      //**Mainly a placeholder for now** 
-                      //We can use this to hold a handful of settings options like dark mode, 
-                      // or if we don't have enough settings options we can change the settings button
-                      // to just a dark mode button
                     ),
                     PopupMenuItem<String>(
                       value: 'Sign Out',
