@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
 import 'useful_widgets.dart';
 import 'lecture_dashboard.dart';
+import 'globals.dart';
 
 class FractionsLectureQuiz extends StatefulWidget{
   @override
@@ -49,7 +50,7 @@ class _FractionsLectureQuiz extends State<FractionsLectureQuiz>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                   backTextMenuBar(context, dashBoardPage, "Fraction"),

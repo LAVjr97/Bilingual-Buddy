@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     Positioned(
@@ -232,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: 855.58,
                         height: 614,
                         decoration: ShapeDecoration(
-                          color: Color(0xFFFFCFB3),
+                          color: textBackgroundColor,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(width: 1),
                             borderRadius: BorderRadius.circular(84),

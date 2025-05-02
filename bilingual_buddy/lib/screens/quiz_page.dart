@@ -330,7 +330,7 @@ class _TFPage extends State<TFPage>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
@@ -532,7 +532,7 @@ class _MCQPage extends State<MCQPage>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
@@ -616,7 +616,7 @@ class _ResultsPage extends State<ResultsPage> {
               child: Container(
                 // Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     boxText(text, x: 0.0, y: -0.2, width: 733, height: 450, fontSize: 80),
@@ -823,7 +823,7 @@ class _TXTPage extends State<TXTPage> {
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
 
@@ -980,7 +980,7 @@ class _MATCH_TILESPage extends State<MATCH_TILESPage>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionQuizzes, "Fraction Quizzes"),

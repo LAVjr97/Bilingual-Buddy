@@ -10,6 +10,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: true);
   createStudentMap(); //Creates the student data
+  createAppColorPalette(); //Sets the app color palette
 
   runApp(MyApp());
 }

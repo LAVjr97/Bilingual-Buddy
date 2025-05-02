@@ -6,6 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
 import 'lessons_page.dart';
+import 'globals.dart';
 
 class Flashcards {
   String frontSide;
@@ -65,7 +66,7 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionsLecture, "Lesson ${widget.lessonNum} Flashcards"),

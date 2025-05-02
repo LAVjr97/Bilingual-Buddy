@@ -53,7 +53,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionDashBoardPage, "Fraction Quizzes"),
@@ -158,7 +158,7 @@ class _FractionsLessons extends State<FractionsLessons>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionDashBoardPage, "Fraction Lessons"),
@@ -231,7 +231,7 @@ class _FractionsFlashCards extends State<FractionsFlashCards>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionDashBoardPage, "Fraction Flashcards"),
