@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'useful_widgets.dart';
 import 'lecture_dashboard.dart';
+import 'globals.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _DashBoardState extends State<DashboardScreen>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     Positioned(
@@ -75,7 +76,7 @@ class _DashBoardState extends State<DashboardScreen>{
                                 child: Text(
                                   'Welcome Back!',
                                   style: TextStyle(
-                                    color: Color(0xFF0C2D57),
+                                    color: textColor,
                                     fontSize: 115,
                                     fontFamily: 'Outfit',
                                     fontWeight: FontWeight.w800,
@@ -98,7 +99,7 @@ class _DashBoardState extends State<DashboardScreen>{
                             child: Text(
                               'Choose your lesson:',
                               style: TextStyle(
-                                color: Color(0xFF0C2D57),
+                                color: textColor,
                                 fontSize: 75,
                                 fontFamily: 'Outfit',
                                 fontWeight: FontWeight.w800,

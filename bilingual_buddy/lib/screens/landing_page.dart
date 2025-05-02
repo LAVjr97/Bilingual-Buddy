@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'globals.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _LandingPage extends State<LandingPage>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     Align( //Logo 
@@ -44,7 +45,7 @@ class _LandingPage extends State<LandingPage>{
                             child: Text(
                               'BILINGUAL BUDDY',
                               style: GoogleFonts.sniglet(
-                                color: Color(0xFF0C2D57),
+                                color: textColor,
                                 fontSize: 96,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -62,7 +63,7 @@ class _LandingPage extends State<LandingPage>{
                         child: ElevatedButton(
                           onPressed: loginPage,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFFFF5CD),
+                            backgroundColor: buttonColor,
                             shape: RoundedRectangleBorder(
                               side: BorderSide(width: 1),
                               borderRadius: BorderRadius.circular(84),
@@ -79,7 +80,7 @@ class _LandingPage extends State<LandingPage>{
                                 child: Text(
                                   "START",
                                   style: GoogleFonts.sniglet(
-                                    color: Color(0xFF0C2D57),
+                                    color: textColor,
                                     fontSize: 80,
                                     fontWeight: FontWeight.w800,
                                   ),

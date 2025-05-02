@@ -5,6 +5,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'globals.dart';
 
 class PDFContainerWidget extends StatelessWidget {
   final String pdfPath;
@@ -97,7 +98,7 @@ class _LessonPage extends State<LessonPage>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionLessons, "Lesson ${widget.lessonNum}"),

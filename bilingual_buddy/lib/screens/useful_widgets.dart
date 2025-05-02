@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'profile_page.dart';
 import 'login_page.dart';
+import 'globals.dart';
 
 
 class CustomArrowButton extends StatelessWidget {
@@ -54,7 +55,7 @@ Widget leftArrowButton(VoidCallback onPressed){
     onPressed: onPressed,
     icon: Icon(
       Icons.arrow_back_ios_new, // Icon inside button
-      color: Color(0xD50C2D57),
+      color: backTextMenuBarColor,
       size: 80,
       weight: 0.8
     ), 
@@ -106,7 +107,7 @@ Widget emojiText(String topEmoji, String bottomText, double width, double fontSi
                 child: Text(
                   bottomText,
                   style: TextStyle(
-                    color: Color(0xFF0C2D57),
+                    color: textColor,
                     fontSize: fontSize,
                     fontFamily: 'a',
                     fontWeight: FontWeight.w800,
@@ -142,7 +143,7 @@ Widget singleText(String text, double width, double fontSize){
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: Color(0xFF0C2D57),
+                    color: textColor,
                     fontSize: fontSize,
                     fontFamily: 'Outfit',
                     fontWeight: FontWeight.w800,
@@ -166,7 +167,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
 
   fontSize ??= 75;
 
-  backColor ??= Color(0xFFFFF5CD);
+  backColor ??= buttonColor;
   
   return Align(
     alignment: Alignment(x, y),
@@ -176,7 +177,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
       child: ElevatedButton(
         onPressed: pressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backColor,
+          backgroundColor: buttonColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
@@ -208,7 +209,7 @@ Widget buttonPairText(String leftText, VoidCallback leftPressed, String rightTex
           child: ElevatedButton(
             onPressed: leftPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFFF5CD),
+              backgroundColor: buttonColor,
               shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1),
                 borderRadius: BorderRadius.circular(84),
@@ -227,7 +228,7 @@ Widget buttonPairText(String leftText, VoidCallback leftPressed, String rightTex
           child: ElevatedButton(
             onPressed: rightPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFFF5CD),
+              backgroundColor: buttonColor,
               shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1),
                 borderRadius: BorderRadius.circular(84),
@@ -259,7 +260,7 @@ Widget buttonEmojiText(String topEmoji, String bottomText, VoidCallback pressed,
       child: ElevatedButton(
         onPressed: pressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFFFF5CD),
+          backgroundColor: buttonColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
@@ -293,7 +294,7 @@ Widget buttonPairEmojiText(String leftTopEmoji, String leftBottomText, VoidCallb
               child: ElevatedButton(
                 onPressed: leftPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFFF5CD),
+                  backgroundColor: buttonColor,
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 1),
                     borderRadius: BorderRadius.circular(84),
@@ -309,7 +310,7 @@ Widget buttonPairEmojiText(String leftTopEmoji, String leftBottomText, VoidCallb
               child: ElevatedButton(
                 onPressed: rightPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFFF5CD),
+                  backgroundColor: buttonColor,
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 1),
                     borderRadius: BorderRadius.circular(84),
@@ -348,7 +349,7 @@ Widget backTextMenuBar(BuildContext context, VoidCallback pressed, String label,
             child: Text(
               label,
               style: TextStyle(
-                color: Color(0xFF0C2D57),
+                color: backTextMenuBarColor,
                 fontSize: 75,
                 fontFamily: 'Outfit',
                 fontWeight: FontWeight.w800,
@@ -363,7 +364,7 @@ Widget backTextMenuBar(BuildContext context, VoidCallback pressed, String label,
   );
 }
 
-Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor, int? textColor}) {
+Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor}) {
   x ??= -0.85;
   y ??= 0.85;
 
@@ -372,7 +373,7 @@ Widget boxText(String text, {double? x, double? y, double? width, double? height
 
   fontSize ??= 64;
   boxColor ??= 0xFFFFCFB3;
-  textColor ??= 0xFF0C2D57;
+
 
   return Align(
     alignment: Alignment(x, y),
@@ -380,7 +381,7 @@ Widget boxText(String text, {double? x, double? y, double? width, double? height
       width: width,
       height: height,
       decoration: ShapeDecoration(
-        color: Color(boxColor),
+        color: buttonColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
@@ -394,7 +395,7 @@ Widget boxText(String text, {double? x, double? y, double? width, double? height
             text, 
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color(textColor),
+              color: textColor,
               fontSize: fontSize,
               fontFamily: 'Outfit',
               fontWeight: FontWeight.w800,
@@ -416,7 +417,7 @@ void showCustomDialogEmoji(BuildContext context, String title, String emojis, Li
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
         ),
-        backgroundColor: Color(0xFFFFF5CD),
+        backgroundColor: dialogBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SizedBox(
@@ -429,7 +430,7 @@ void showCustomDialogEmoji(BuildContext context, String title, String emojis, Li
                 Text(
                   title,
                   style: TextStyle(
-                    color: Color(0xFF0C2D57),
+                    color: textColor,
                     fontSize: 96,
                     fontFamily: 'Outfit',
                     fontWeight: FontWeight.w800,
@@ -469,7 +470,7 @@ void showCustomDialog(BuildContext context, String title, List<Widget> actions, 
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
           ),
-          backgroundColor: Color(0xFFFFF5CD), 
+          backgroundColor: dialogBackgroundColor, 
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SizedBox(
@@ -483,7 +484,7 @@ void showCustomDialog(BuildContext context, String title, List<Widget> actions, 
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color(0xFF0C2D57),
+                      color: textColor,
                       fontSize: fontSize,
                       fontFamily: 'Outfit',
                       fontWeight: FontWeight.w800,
@@ -522,10 +523,10 @@ Widget menuButton(BuildContext context){
                 splashRadius: 1,
                 padding: EdgeInsets.zero,
                 offset: Offset(0, 50),
-                color: Color(0xFFFFF5CD), //The following 4 lines change the look of the hamburger menu button
+                color: backgroundColor, //The following 4 lines change the look of the hamburger menu button
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: Color(0xFF0C2D57), width: 1),
+                  side: BorderSide(color: textColor, width: 1),
                 ),
                 onSelected: (value){
                   if (value == 'Profile') {
@@ -551,7 +552,7 @@ Widget menuButton(BuildContext context){
                           child: Text(
                             "Yes",
                             style: TextStyle(
-                              color: Color(0xFF0C2D57),
+                              color: textColor,
                               fontSize: 36,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.w800,
@@ -566,7 +567,7 @@ Widget menuButton(BuildContext context){
                           child: Text(
                             "No",
                             style: TextStyle(
-                              color: Color(0xFF0C2D57),
+                              color: textColor,
                               fontSize: 36,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.w800,
@@ -613,7 +614,7 @@ Widget menuButton(BuildContext context){
   );
 }
 
-Widget boxInput(TextEditingController inputController, String hint, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor, int? textColor}){
+Widget boxInput(TextEditingController inputController, String hint, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor}){
   x ??= -0.85;
   y ??= 0.85;
 
@@ -622,15 +623,14 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
 
   fontSize ??= 48;
   boxColor ??= 0xFFFFF5CD;
-  textColor ??= 0xFF0C2D57;
 
-  return Align( //Username input field (using align because its convenient)
+  return Align( 
     alignment: Alignment(x, y),
     child: Container(
       width: width,
       height: height,
       decoration: ShapeDecoration(
-        color: Color(boxColor),
+        color: inputTextColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
@@ -643,7 +643,7 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
           controller: inputController,
           textAlign: TextAlign.center,
           style: TextStyle(           //Actual input text
-            color: Color(textColor),// Color(0xFF0C2D57),
+            color: textColor,// Color(0xFF0C2D57),
             fontSize: fontSize,
             fontFamily: 'Outfit',
             fontWeight: FontWeight.w800,
@@ -652,7 +652,7 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
             border: InputBorder.none,
             hintText: hint,
             hintStyle: TextStyle(
-              color: Color(textColor),
+              color: textColor,
               fontSize: fontSize,
               fontFamily: 'Outfit',
               fontWeight: FontWeight.w800,

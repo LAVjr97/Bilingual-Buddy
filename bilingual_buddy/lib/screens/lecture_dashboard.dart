@@ -4,7 +4,7 @@ import 'lessons_page.dart';
 import 'dashboard_screen.dart';
 import 'student_info.dart';
 import 'flashcards.dart';
-
+import 'globals.dart';
 
 class FractionsLecture extends StatefulWidget{
   @override
@@ -59,7 +59,7 @@ class _FractionsLecture extends State<FractionsLecture>{
             Expanded(
               child: Container( //Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(color: Color(0xFFB7E0FF)),
+                decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     backTextMenuBar(context, fractionDashBoardPage, "Fraction Lecture"),
