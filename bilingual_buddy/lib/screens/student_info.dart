@@ -68,6 +68,15 @@ class Completion {
   late double totalQuizCompletionPercentage;
 
   Completion(this.completedQuizzes, this.completedFlashCards);
+
+  double calculateTotalQuizCompletionPercentage(){
+    for(int i = 0; i < completedQuizzes.length; i++){
+      this.totalQuizCompletionPercentage = this.totalQuizCompletionPercentage + completedQuizzes[i].percentCompleted;
+    }
+
+    this.totalQuizCompletionPercentage = this.totalQuizCompletionPercentage / completedQuizzes.length;
+    return this.totalQuizCompletionPercentage;
+  }
 }
 
 class QuizCompletion {
