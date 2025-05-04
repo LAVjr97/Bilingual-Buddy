@@ -178,7 +178,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
       child: ElevatedButton(
         onPressed: pressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
+          backgroundColor: backColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1),
             borderRadius: BorderRadius.circular(84),
@@ -524,7 +524,7 @@ Widget menuButton(BuildContext context){
                 splashRadius: 1,
                 padding: EdgeInsets.zero,
                 offset: Offset(0, 50),
-                color: backgroundColor, //The following 4 lines change the look of the hamburger menu button
+                color: buttonColor, //The following 4 lines change the look of the hamburger menu button
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                   side: BorderSide(color: textColor, width: 1),
@@ -536,10 +536,7 @@ Widget menuButton(BuildContext context){
                       context, 
                       MaterialPageRoute(
                         builder: (context) => ProfilePage(
-                          student: Student(
-                            info: StudentInfo(1, "Test", "User"),
-                            quizCompletion: QuizCompletion([true, false, true]),
-                          )
+                          student: currentStudent
                         )
                       ),
                       );
@@ -590,11 +587,23 @@ Widget menuButton(BuildContext context){
                   return [
                     PopupMenuItem<String>(
                       value: 'Profile',
-                      child: Text('Profile'),
+                      child: Text(
+                        'Profile', 
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: textColor
+                        ),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: 'Sign Out',
-                      child: Text('Sign Out'),
+                      child: Text(
+                        'Sign Out',
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: textColor
+                        ),
+                      ),
                     ),
                   ];
                 },
@@ -672,22 +681,22 @@ Color getColorForPercentage(double percentage) {
   const bronze = Color(0xFFCD7F32);   
   const silver = Color(0xFFC0C0C0);   
   const gold   = Color(0xFFFFD700);   
-  const platinum = Color(0xFFE5E4E2); 
+  const red = Color.fromARGB(255, 214, 18, 18); 
 
   if (percentage < 50) {
-    // 0% → 50%: Bronze solid
-    return bronze;
+    // 0% → 50%: Red solid
+    return red;
   } else if (percentage < 75) {
-    // 50% → 75%: Bronze → Silver
+    // 50% → 75%: Red → Bronze
     double t = (percentage - 50) / 25; // Normalize to 0-1
-    return Color.lerp(bronze, silver, t)!;
+    return Color.lerp(red, bronze, t)!;
   } else if (percentage < 90) {
-    // 75% → 90%: Silver → Gold
+    // 75% → 90%: Bronze → Silver
     double t = (percentage - 75) / 15; // Normalize to 0-1
-    return Color.lerp(silver, gold, t)!;
+    return Color.lerp(bronze, silver, t)!;
   } else {
-    // 90% → 100%: Gold → Platinum
+    // 90% → 100%: Silver → Gold
     double t = (percentage - 90) / 10; // Normalize to 0-1
-    return Color.lerp(gold, platinum, t)!;
+    return Color.lerp(silver, gold, t)!;
   }
 }
