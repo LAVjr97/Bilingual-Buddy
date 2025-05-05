@@ -85,7 +85,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                             TXT("How do you say 5.6 in English?", "Five Point Six", "hint"), 
                             MCQ("Which is the correct way to say 0.4 in English?", ["Zero Four", "Zero Point Four", "Four Tenth"], 1, "hint"),
                           ], 1), 
-                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 120, backColor: currentStudent.quizCompletion.completedQuizzes[0].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[0].percentCompleted)
+                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 120, backColor: currentStudent.quizCompletion.decimalQuizzes[0].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[0].percentCompleted)
                           ),
 
                         buttonText('2', () => quiz([
@@ -94,7 +94,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                             TXT("How do you say 10.5 in English?", "Ten Point Five", "hint"),
                             MCQ("Which is correct for 7.07?", ["Seven Point Zero Seven", "Seven Point Seven", "Seven Zero Seven"], 0, "hint"),
                           ], 2), 
-                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[1].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[1].percentCompleted)
+                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[1].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[1].percentCompleted)
                           ),
 
                         buttonText('3', () => quiz([
@@ -103,7 +103,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                             TXT("Write 4.25 in English.", "Four Point Two Five", "hint"),
                             MCQ("What is the correct way to say 0.001?", ["Zero Point Zero Zero One", "Zero Point One", "One Thousandth"], 0, "hint"),
                           ], 3), 
-                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 120, backColor: currentStudent.quizCompletion.completedQuizzes[2].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[2].percentCompleted)
+                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 120, backColor: currentStudent.quizCompletion.decimalQuizzes[2].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[2].percentCompleted)
                           ),
 
                       ],
@@ -119,7 +119,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                               TXT("How do you say 9.01 in English?", "Nine Point Zero One", "hint"),
                               MCQ("Which of the following is correct for 100.5?", ["One Hundred Five", "One Hundred Point Five", "One Zero Zero Point Five"], 1, "hint"),
                             ], 4), 
-                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[3].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[3].percentCompleted)
+                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[3].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[3].percentCompleted)
                             ),
 
                         buttonText('5', () => quiz([
@@ -128,7 +128,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                               TXT("How do you write 0.505 in English?", "Zero Point Five Zero Five", "hint"),
                               MCQ("Which of these is the correct way to say 6.66?", ["Six Point Six Six", "Six Sixty-Six", "Six and Sixty-Six"], 0, "hint"),
                             ], 5), 
-                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[4].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[4].percentCompleted)
+                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[4].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[4].percentCompleted)
                             ),
 
                         buttonText('G', () => quiz([
@@ -139,7 +139,7 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                                 "Seven Point Zero Five", "7.05"
                               ], "Match each decimal with its English wording.")
                             ], 6), 
-                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[5].percentCompleted)
+                            x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted)
                             ),
 
                       ],

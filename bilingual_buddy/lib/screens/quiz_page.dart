@@ -551,12 +551,19 @@ class _MCQPage extends State<MCQPage>{
   }
 }
 
+// In quiz_page.dart, find the ResultsPage and replace with:
+
 class ResultsPage extends StatefulWidget {
   final int correctAnswers;
   final int totalQuestions;
   final int quizNumber;
 
-  const ResultsPage({required this.correctAnswers, required this.totalQuestions, required this.quizNumber, Key? key}) : super(key: key);
+  const ResultsPage({
+    required this.correctAnswers,
+    required this.totalQuestions,
+    required this.quizNumber,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _ResultsPage createState() => _ResultsPage();
@@ -566,22 +573,24 @@ class _ResultsPage extends State<ResultsPage> {
   late ConfettiController _rightConfettiController;
   late ConfettiController _leftConfettiController;
 
-  void fractionQuizzes() async{
-    Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => FractionsQuizzes())); 
-  }
-
   @override
   void initState() {
     super.initState();
     _rightConfettiController = ConfettiController(duration: const Duration(seconds: 3));
-    _leftConfettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _leftConfettiController  = ConfettiController(duration: const Duration(seconds: 3));
 
-    if(currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].correctAnswers < widget.correctAnswers){
-      currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].correctAnswers = widget.correctAnswers;
-      currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1].calculatePercent();
+    // **NEW**: write back into fractionQuizzes
+    var record = currentStudent.quizCompletion.fractionQuizzes[widget.quizNumber - 1];
+    if (widget.correctAnswers > record.correctAnswers) {
+      record.correctAnswers = widget.correctAnswers;
+      record.calculatePercent();
     }
-    log("Quiz #${widget.quizNumber} completed");
+
+    // play confetti if perfect
+    if (widget.correctAnswers == widget.totalQuestions) {
+      _rightConfettiController.play();
+      _leftConfettiController.play();
+    }
   }
 
   @override
@@ -591,16 +600,13 @@ class _ResultsPage extends State<ResultsPage> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     String text;
-    if(widget.correctAnswers >= 1){
-      if(widget.correctAnswers == widget.totalQuestions){
+    if (widget.correctAnswers >= 1) {
+      if (widget.correctAnswers == widget.totalQuestions) {
         text = "You got ALL ${widget.totalQuestions} questions correct on your first try!";
-        _rightConfettiController.play();
-        _leftConfettiController.play();
-      }else{
+      } else {
         text = "You got ${widget.correctAnswers} of ${widget.totalQuestions} correct on your first try!";
       }
     } else {
@@ -608,24 +614,28 @@ class _ResultsPage extends State<ResultsPage> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false, // makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
             Expanded(
               child: Container(
-                // Screen borders for the background color
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
                     boxText(text, x: 0.0, y: -0.2, width: 733, height: 450, fontSize: 80),
-                    buttonText("Back to Quizzes", fractionQuizzes, x: 0.0, y: 0.75, width: 350, height: 90, fontSize: 40),
+                    buttonText("Back to Quizzes", () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => FractionsQuizzes()),
+                      );
+                    }, x: 0.0, y: 0.75, width: 350, height: 90, fontSize: 40),
                     Align(
                       alignment: Alignment(0.9, -0.95),
                       child: ConfettiWidget(
                         confettiController: _leftConfettiController,
-                        blastDirection: pi / 2, 
+                        blastDirection: pi / 2,
                         blastDirectionality: BlastDirectionality.directional,
                         shouldLoop: false,
                         maxBlastForce: 20,
@@ -633,14 +643,13 @@ class _ResultsPage extends State<ResultsPage> {
                         emissionFrequency: 0.05,
                         numberOfParticles: 15,
                         gravity: 0.3,
-                        //Colors: const [Colors.red], we can set the confetti to a certain color here
                       ),
                     ),
                     Align(
                       alignment: Alignment(-0.9, -0.95),
                       child: ConfettiWidget(
                         confettiController: _rightConfettiController,
-                        blastDirection: pi / 2, 
+                        blastDirection: pi / 2,
                         blastDirectionality: BlastDirectionality.directional,
                         shouldLoop: false,
                         maxBlastForce: 20,
@@ -648,7 +657,6 @@ class _ResultsPage extends State<ResultsPage> {
                         emissionFrequency: 0.05,
                         numberOfParticles: 15,
                         gravity: 0.3,
-                        //Colors: const [Colors.red], we can set the confetti to a certain color here
                       ),
                     ),
                   ],
@@ -661,6 +669,7 @@ class _ResultsPage extends State<ResultsPage> {
     );
   }
 }
+
 
 class TXTPage extends StatefulWidget {
   final int lessonNum;
