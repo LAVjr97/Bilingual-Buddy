@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'useful_widgets.dart';
 import 'lecture_dashboard.dart';
+import 'dec_lecture_dashboard.dart';
 import 'globals.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -18,6 +19,8 @@ class _DashBoardState extends State<DashboardScreen>{
   }
 
   void decimalPage() async{
+    Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => DecimalsLecture()));  
     return;
   }
 

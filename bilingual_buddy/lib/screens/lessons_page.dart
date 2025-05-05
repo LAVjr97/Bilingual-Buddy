@@ -97,7 +97,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                           TXT("How do you write\n3/8\nin English?", "Three-Eighths", "Como se escribe 3/8 en ingles?")], 5), 
                           x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[4].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[4].percentCompleted)
                         ),
-                        buttonText('+', () => quiz([
+                        buttonText('G', () => quiz([
                           MATCH_TILES("Question", ["Three Fourths", "3/4", "One Half", "1/2", "Eleven Fifteenths", "11/15", "Nine Thirds", "9/3"], "Hint")], 6), 
                           x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.completedQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.completedQuizzes[5].percentCompleted)
                         ),
