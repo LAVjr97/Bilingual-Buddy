@@ -804,6 +804,8 @@ class _DecimalsMATCH_TILESPage extends State<DecimalsMATCH_TILESPage> {
 //
 // ——————— Results Page ———————
 //
+// Replace your existing DecimalsResultsPage in dec_quiz_page.dart with:
+
 class DecimalsResultsPage extends StatefulWidget {
   final int correctAnswers;
   final int totalQuestions;
@@ -827,18 +829,18 @@ class _DecimalsResultsPage extends State<DecimalsResultsPage> {
   @override
   void initState() {
     super.initState();
-    _rightController =
-        ConfettiController(duration: const Duration(seconds: 3));
-    _leftController =
-        ConfettiController(duration: const Duration(seconds: 3));
+    _rightController = ConfettiController(duration: const Duration(seconds: 3));
+    _leftController  = ConfettiController(duration: const Duration(seconds: 3));
 
-    var record =
-        currentStudent.quizCompletion.completedQuizzes[widget.quizNumber - 1];
+    // **WRITE INTO decimalQuizzes** instead of the old combined list
+    var record = currentStudent.quizCompletion
+        .decimalQuizzes[widget.quizNumber - 1];
     if (widget.correctAnswers > record.correctAnswers) {
       record.correctAnswers = widget.correctAnswers;
       record.calculatePercent();
     }
 
+    // trigger confetti on perfect score
     if (widget.correctAnswers == widget.totalQuestions) {
       _rightController.play();
       _leftController.play();
@@ -878,32 +880,35 @@ class _DecimalsResultsPage extends State<DecimalsResultsPage> {
                 decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
-                    boxText(text,
-                        x: 0.0, y: -0.2, width: 733, height: 450, fontSize: 80),
-                    buttonText("Back to Quizzes", () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => DecimalsQuizzes()),
-                      );
-                    },
-                        x: 0.0,
-                        y: 0.75,
-                        width: 350,
-                        height: 90,
-                        fontSize: 40),
+                    boxText(
+                      text,
+                      x: 0.0,
+                      y: -0.2,
+                      width: 733,
+                      height: 450,
+                      fontSize: 80,
+                    ),
+                    buttonText(
+                      "Back to Quizzes",
+                      () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => DecimalsQuizzes()),
+                        );
+                      },
+                      x: 0.0,
+                      y: 0.75,
+                      width: 350,
+                      height: 90,
+                      fontSize: 40,
+                    ),
                     Align(
                       alignment: Alignment(0.9, -0.95),
                       child: ConfettiWidget(
                         confettiController: _leftController,
                         blastDirection: pi / 2,
                         blastDirectionality: BlastDirectionality.directional,
-                        shouldLoop: false,
-                        maxBlastForce: 20,
-                        minBlastForce: 5,
-                        emissionFrequency: 0.05,
-                        numberOfParticles: 15,
-                        gravity: 0.3,
                       ),
                     ),
                     Align(
@@ -912,12 +917,6 @@ class _DecimalsResultsPage extends State<DecimalsResultsPage> {
                         confettiController: _rightController,
                         blastDirection: pi / 2,
                         blastDirectionality: BlastDirectionality.directional,
-                        shouldLoop: false,
-                        maxBlastForce: 20,
-                        minBlastForce: 5,
-                        emissionFrequency: 0.05,
-                        numberOfParticles: 15,
-                        gravity: 0.3,
                       ),
                     ),
                   ],
