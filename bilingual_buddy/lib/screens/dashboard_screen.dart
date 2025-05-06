@@ -37,11 +37,11 @@ class _DashBoardState extends State<DashboardScreen>{
                 decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
                   children: [
-                    Positioned(
-                      top: 16.0, //aligning the menu button to the top right of the screen
-                      right: 16.0,
+                    Align(
+                      alignment: Alignment(0.893, -0.833),
                       child: menuButton(context),
                     ),
+
                     Positioned(
                       left: 253,
                       top: 1076,

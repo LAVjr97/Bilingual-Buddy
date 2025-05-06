@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'dec_lessons_page.dart';
 import 'dashboard_screen.dart';
-import 'student_info.dart';
-import 'dec_flashcards.dart';
 import 'globals.dart';
 
 class DecimalsLecture extends StatefulWidget {

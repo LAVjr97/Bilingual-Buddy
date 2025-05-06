@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'package:flip_card/flip_card.dart';
-import 'lecture_dashboard.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
