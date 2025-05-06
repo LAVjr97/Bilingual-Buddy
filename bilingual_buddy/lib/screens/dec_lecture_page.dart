@@ -1,55 +1,9 @@
-// File: dec_lecture_page.dart
-
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'dec_lessons_page.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'dart:typed_data';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'globals.dart';
+import 'package:pdfx/pdfx.dart';
 
-class PDFContainerWidget extends StatelessWidget {
-  final String pdfPath;
-
-  PDFContainerWidget({required this.pdfPath});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: _loadPDFAsset(context, pdfPath),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            return Container(
-              width: 1042,
-              height: 614,
-              padding: EdgeInsets.all(20),
-              color: const Color(0xFF0C2D57),
-              child: PDFView(
-                filePath: snapshot.data!,
-                fitPolicy: FitPolicy.BOTH,
-                swipeHorizontal: true,
-              ),
-            );
-          } else {
-            return Center(child: Text("Failed to load PDF"));
-          }
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    );
-  }
-
-  Future<String> _loadPDFAsset(BuildContext context, String assetPath) async {
-    final ByteData data = await DefaultAssetBundle.of(context).load(assetPath);
-    final List<int> bytes = data.buffer.asUint8List();
-    final String tempPath = (await getTemporaryDirectory()).path;
-    final File file = File('$tempPath/sample.pdf');
-    await file.writeAsBytes(bytes, flush: true);
-    return file.path;
-  }
-}
 
 class DecimalsLessonPage extends StatefulWidget {
   final String pdfPath;
@@ -66,6 +20,13 @@ class DecimalsLessonPage extends StatefulWidget {
 }
 
 class _DecimalsLessonPage extends State<DecimalsLessonPage> {
+  late final PdfController pdfController;
+
+  @override
+  void initState() {
+    super.initState();
+    pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
+  }
   void decimalsLessons() {
     Navigator.pushReplacement(
       context,
@@ -110,8 +71,21 @@ class _DecimalsLessonPage extends State<DecimalsLessonPage> {
                     ),
                     Align(
                       alignment: Alignment(0.0, 0.8),
-                      child: PDFContainerWidget(pdfPath: widget.pdfPath),
-                    ),
+                      child: Container(
+                        width: 1042,
+                        height: 614,
+                        child: Container(
+                          padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
+                          color: textColor,
+                          child: PdfView(
+                            controller: pdfController,
+                            builders: PdfViewBuilders<DefaultBuilderOptions>(
+                              options: DefaultBuilderOptions(),
+                            ),
+                          )
+                        ),
+                      )
+                    )
                   ],
                 ),
               ),

@@ -45,6 +45,8 @@ dependencies:
   path_provider: ^2.0.11
   audioplayers: ^6.4.0
   confetti: ^0.8.0
+  syncfusion_flutter_pdfviewer: ^29.1.38
+  pdfx: ^2.9.1
 
 dev_dependencies:
   flutter_test:

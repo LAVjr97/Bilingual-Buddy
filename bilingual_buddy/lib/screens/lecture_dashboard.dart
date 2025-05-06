@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dashboard_screen.dart';
-import 'student_info.dart';
-import 'flashcards.dart';
 import 'globals.dart';
 
 class FractionsLecture extends StatefulWidget{

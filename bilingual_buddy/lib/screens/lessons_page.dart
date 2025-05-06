@@ -3,7 +3,6 @@ import 'useful_widgets.dart';
 import 'lecture_dashboard.dart';
 import 'quiz_page.dart';
 import 'lecture_page.dart';
-import 'games_page.dart';
 import 'globals.dart';
 import 'flashcards.dart';
 

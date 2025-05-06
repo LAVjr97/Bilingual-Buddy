@@ -1,4 +1,3 @@
-import 'package:bilingual_buddy/screens/student_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -515,9 +514,7 @@ Widget menuButton(BuildContext context){
 
       return StatefulBuilder(
         builder: (context, innerSetState){
-          return Align(
-            alignment: Alignment(0.0, 0.0),
-            child: MouseRegion(
+          return MouseRegion(
               onEnter: (_) => innerSetState(() => isHovered = true),
               onExit: (_) => innerSetState(() => isHovered = false),
               child: PopupMenuButton<String>(
@@ -615,8 +612,8 @@ Widget menuButton(BuildContext context){
                   height: 78,
                 ),
               ),
-            ),
-          );
+            );
+          
         },
       );
     },
