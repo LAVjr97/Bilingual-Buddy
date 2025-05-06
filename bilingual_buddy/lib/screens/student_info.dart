@@ -1,8 +1,5 @@
 
 // File: student_info.dart
-
-import 'package:firebase_core/firebase_core.dart';
-
 /// Holds all student data, including quiz completion for fractions and decimals.
 class Student {
   final StudentInfo info;

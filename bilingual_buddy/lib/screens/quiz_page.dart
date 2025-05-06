@@ -3,7 +3,6 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
-import 'student_info.dart';
 import 'quiz_hint.dart';
 import 'package:confetti/confetti.dart';
 import 'globals.dart';

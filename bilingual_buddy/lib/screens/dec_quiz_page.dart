@@ -5,7 +5,6 @@ import 'useful_widgets.dart';
 import 'dec_lessons_page.dart';       // for DecimalsQuizzes
 import 'dart:developer';
 import 'dart:math' hide log;
-import 'student_info.dart';
 import 'dec_quiz_hint.dart';
 import 'package:confetti/confetti.dart';
 import 'globals.dart';
