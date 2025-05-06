@@ -1,5 +1,3 @@
-// File: dec_flashcards.dart
-
 import 'package:flutter/material.dart';
 import 'useful_widgets.dart';
 import 'package:flip_card/flip_card.dart';
@@ -8,6 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'dart:developer';
 import 'dart:math' hide log;
 import 'globals.dart';
+import 'chat_assistant.dart'; // Make sure this import is included
 
 class Flashcards {
   String frontSide;
@@ -55,7 +54,7 @@ class _DecimalsFlashcardViewerState extends State<DecimalsFlashcardViewer> {
           const curve = Curves.easeInOut;
 
           var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           var offsetAnimation = animation.drive(tween);
 
           return SlideTransition(
@@ -101,7 +100,7 @@ class _DecimalsFlashcardViewerState extends State<DecimalsFlashcardViewer> {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 55.0),
+                              const EdgeInsets.symmetric(horizontal: 55.0),
                               child: FlipCard(
                                 key: GlobalKey<FlipCardState>(),
                                 direction: FlipDirection.VERTICAL,
@@ -123,6 +122,7 @@ class _DecimalsFlashcardViewerState extends State<DecimalsFlashcardViewer> {
                         ),
                       ),
                     ),
+                    const ChatAssistant(), // 👈 Added floating chat assistant
                   ],
                 ),
               ),

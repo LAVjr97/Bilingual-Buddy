@@ -3,8 +3,9 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'globals.dart';
 import 'package:pdfx/pdfx.dart';
+import 'chat_assistant.dart';
 
-class LessonPage extends StatefulWidget{ 
+class LessonPage extends StatefulWidget {
   final String pdfPath;
   final int lessonNum;
 
@@ -14,19 +15,20 @@ class LessonPage extends StatefulWidget{
   _LessonPage createState() => _LessonPage();
 }
 
-class _LessonPage extends State<LessonPage>{
-late final PdfController pdfController;
+class _LessonPage extends State<LessonPage> {
+  late final PdfController pdfController;
 
-@override
-void initState() {
-  super.initState();
-  pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
-}
+  @override
+  void initState() {
+    super.initState();
+    pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
+  }
 
-  void fractionLessons(){
-    Navigator.pushReplacement( 
-      context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => FractionsLessons(), 
+  void fractionLessons() {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsLessons(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
@@ -40,19 +42,19 @@ void initState() {
             child: child,
           );
         },
-      )
-    );  
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, //makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
             Expanded(
-              child: Container( //Screen borders for the background color
+              child: Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: backgroundColor),
                 child: Stack(
@@ -63,25 +65,24 @@ void initState() {
                       child: Container(
                         width: 1042,
                         height: 614,
-                        child: Container(
-                          padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
-                          color: textColor,
-                          child: PdfView(
-                            controller: pdfController,
-                            builders: PdfViewBuilders<DefaultBuilderOptions>(
-                              options: DefaultBuilderOptions(),
-                            ),
-                          )
+                        padding: EdgeInsets.all(20),
+                        color: textColor,
+                        child: PdfView(
+                          controller: pdfController,
+                          builders: PdfViewBuilders<DefaultBuilderOptions>(
+                            options: DefaultBuilderOptions(),
+                          ),
                         ),
-                      )
-                    )
-                  ]
-                )
-              )
-            )
-          ]
-        )
-      )
+                      ),
+                    ),
+                    ChatAssistant(), // ✅ Floating chat assistant for this page
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

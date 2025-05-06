@@ -3,7 +3,7 @@ import 'useful_widgets.dart';
 import 'dec_lessons_page.dart';
 import 'globals.dart';
 import 'package:pdfx/pdfx.dart';
-
+import 'chat_assistant.dart'; // 👈 Added import
 
 class DecimalsLessonPage extends StatefulWidget {
   final String pdfPath;
@@ -27,6 +27,7 @@ class _DecimalsLessonPage extends State<DecimalsLessonPage> {
     super.initState();
     pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
   }
+
   void decimalsLessons() {
     Navigator.pushReplacement(
       context,
@@ -75,17 +76,18 @@ class _DecimalsLessonPage extends State<DecimalsLessonPage> {
                         width: 1042,
                         height: 614,
                         child: Container(
-                          padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
+                          padding: EdgeInsets.all(20),
                           color: textColor,
                           child: PdfView(
                             controller: pdfController,
                             builders: PdfViewBuilders<DefaultBuilderOptions>(
                               options: DefaultBuilderOptions(),
                             ),
-                          )
+                          ),
                         ),
-                      )
-                    )
+                      ),
+                    ),
+                    const ChatAssistant(), // 👈 Added chat assistant floating button
                   ],
                 ),
               ),
