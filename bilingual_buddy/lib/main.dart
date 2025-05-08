@@ -4,11 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'screens/landing_page.dart'; //landing page
 import 'firebase_options.dart';
 import 'screens/globals.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // 👈 added for .env support
+import 'package:flutter_dotenv/flutter_dotenv.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await dotenv.load(); // 👈 load .env before anything else
+  await dotenv.load(); 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: true);
   createStudentMap(); //Creates the student data
