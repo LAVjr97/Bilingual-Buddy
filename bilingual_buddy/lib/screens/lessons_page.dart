@@ -64,14 +64,14 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                           TF("Half is known as 1/2\n", ["False", "True"], 1, "hint"), 
                           MCQ("How do you write 2/9 in English?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0, "hint"), 
                           MCQ("How do you write 4/8 in English?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1, "hint")], 1), 
-                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted)
+                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted == 0 ? buttonColor : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted)
                         ),
                         buttonText('2', () => quiz([
                           MCQ("Which fraction is equivalent to 3/6?", ["1/2", "2/3", "3/4"], 0, "hint"),
                           TF("One-fourth is smaller than one-half.\n", ["True", "False"], 0, "hint"),
                           MCQ("How do you write 7/8 in English?", ["Seven-Eighths", "Seven-Fifths", "Seven-Tenths"], 0, "hint"),
                           TF("Two-fifths is larger than one-half.\n", ["True", "False"], 1, "hint")], 2), 
-                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted)
+                          x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted == 0 ? buttonColor : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted)
                         ),
                         buttonText('3', () => quiz([
                           MCQ("How do you write 5/6 in English?", ["Five-Sixths", "Five-Eighths", "Five-Thirds"], 0, "hint"), 
@@ -97,7 +97,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                           x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[4].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[4].percentCompleted)
                         ),
                         buttonText('G', () => quiz([
-                          MATCH_TILES("Question", ["Three Fourths", "3/4", "One Half", "1/2", "Eleven Fifteenths", "11/15", "Nine Thirds", "9/3"], "Hint")], 6), 
+                          MATCH_TILES("Question", ["Three Fourths", "3/4", "One Half", "1/2", "Eleven Fifteenths", "11/15", "Nine Thirds", "9/3"], "Hint"), TXT("How do you write\n3/8\nin English?", "Three-Eighths", "Como se escribe 3/8 en ingles?")], 6), 
                           x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[5].percentCompleted)
                         ),
                       ],

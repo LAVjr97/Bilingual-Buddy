@@ -33,6 +33,31 @@ void createStudentMap() {
         completedFlashCards: [0.0],
       ),
     ),
+    'r877zLHljvd8BpxDwZjeZ3sghMj1': Student(
+      info: StudentInfo(1, 'Bucky', 'Bronco'),
+      quizCompletion: Completion(
+        // Six fraction quizzes (match your original totalQuestions per quiz)
+        fractionQuizzes: [
+          QuizCompletion(1, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 1),
+          QuizCompletion(0, 1),
+        ],
+        // Six decimal quizzes (adjust totalQuestions to match your decimal sets)
+        decimalQuizzes: [
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 4),
+          QuizCompletion(0, 1),
+        ],
+        // If you still want to track flashcards, otherwise you can omit this
+        completedFlashCards: [0.0],
+      ),
+    ),
   };
 }
 

@@ -15,13 +15,13 @@ class LessonPage extends StatefulWidget{
 }
 
 class _LessonPage extends State<LessonPage>{
-late final PdfController pdfController;
+  late final PdfController pdfController;
 
-@override
-void initState() {
-  super.initState();
-  pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
-}
+  @override
+  void initState() {
+    super.initState();
+    pdfController = PdfController(document: PdfDocument.openAsset(widget.pdfPath));
+  }
 
   void fractionLessons(){
     Navigator.pushReplacement( 

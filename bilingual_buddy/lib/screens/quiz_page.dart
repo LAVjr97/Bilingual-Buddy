@@ -7,7 +7,6 @@ import 'quiz_hint.dart';
 import 'package:confetti/confetti.dart';
 import 'globals.dart';
 
-
 class Question{
   String question;
   String hint;

@@ -221,8 +221,7 @@ class _DecimalsLessons extends State<DecimalsLessons> {
                       children: [
                         buttonText(
                           '1',
-                          () => lessonPage(
-                              "assets/lessons/Senior_Design.pdf", 1),
+                          () => lessonPage("assets/lessons/decimals_lesson_1.pdf", 1),
                           x: 0.0,
                           y: -0.3,
                           width: 310,

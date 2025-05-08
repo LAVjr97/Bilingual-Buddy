@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart'; // 👈 added for .env supp
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(); // 👈 load .env before anything else
+  //await dotenv.load(); // 👈 load .env before anything else
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: true);
   createStudentMap(); //Creates the student data

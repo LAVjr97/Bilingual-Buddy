@@ -16,6 +16,14 @@ class StudentInfo {
   final String lastName;
 
   StudentInfo(this.studentId, this.firstName, this.lastName);
+
+  factory StudentInfo.fromMap(Map<String, dynamic> data) {
+    return StudentInfo(
+      data['studentId'] ?? 0,
+      data['firstName'] ?? 'Unknown',
+      data['lastName'] ?? 'Unknown'
+    );
+  }
 }
 
 /// Tracks completion separately for fraction quizzes and decimal quizzes.
