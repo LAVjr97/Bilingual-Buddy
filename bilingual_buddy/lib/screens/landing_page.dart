@@ -86,7 +86,7 @@ class _LandingPage extends State<LandingPage> {
           ),
         ),
         // Floating Chat Assistant
-        ChatAssistant(),
+        //ChatAssistant(),
       ],
     );
   }

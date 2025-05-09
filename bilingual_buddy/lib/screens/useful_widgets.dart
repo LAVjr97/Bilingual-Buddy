@@ -606,8 +606,8 @@ Widget menuButton(BuildContext context){
                 },
                 child: SvgPicture.asset(
                   isHovered
-                    ? 'lib/assets/images/hover_menu_button.svg'
-                    : 'lib/assets/images/menu_button.svg',
+                    ? 'assets/images/hover_menu_button.svg'
+                    : 'assets/images/menu_button.svg',
                   width: 102,
                   height: 78,
                 ),
