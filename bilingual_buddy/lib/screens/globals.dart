@@ -89,7 +89,7 @@ Color tfButtonTextColor = Color(0xD50C2D57);
 // TXT
 Color txtQuestionColor = Color(0xFFDDEB9D);  // Orange-yellow
 TextStyle txtTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Deep navy
-Color txtButtonColor = Color(0xFFC299FF); // orange-yellow
+Color txtButtonColor = Color(0xFF9999FF); // orange-yellow
 Color txtButtonTextColor = Color(0xD50C2D57);
 
 
