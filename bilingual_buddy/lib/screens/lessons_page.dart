@@ -79,7 +79,7 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                           MCQ("How do you write 5/6 in English?", ["Five-Sixths", "Five-Eighths", "Five-Thirds"], 0, "¿Cómo se escribe 5/6 en inglés?"),
                           TF("One-third is smaller than one-half.\n", ["True", "False"], 0, "Un tercio es más pequeño que la mitad."),
                           MCQ("Which fraction is equivalent to 4/8?", ["One-Half", "Two-Thirds", "Three-Fourths"], 0, "¿Qué fracción es equivalente a 4/8?"),
-                          TF("Two-fourths is the same as one-half.\n", ["True", "False"], 1, "Dos cuartos es lo mismo que la mitad.")], 3),
+                          TF("Two-fourths is the same as one-half.\n", ["True", "False"], 0, "Dos cuartos es lo mismo que la mitad.")], 3),
                           x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[2].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[2].percentCompleted)
                         ),
                       ],
