@@ -868,7 +868,7 @@ class _TXTPage extends State<TXTPage> {
                     width: 1133, 
                     height: 412,
                     backColor: txtQuestionColor),
-                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100, fontSize: 48, backColor: txtQuestionColor),
+                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100, fontSize: 48, backColor: txtButtonColor),
                     buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48, backColor: txtQuestionColor),
 
                   ]
