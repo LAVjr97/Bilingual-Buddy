@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'dart:math' hide log;
 import 'lessons_page.dart';
 import 'globals.dart';
+import 'chat_assistant.dart';
 
 class Flashcards {
   String frontSide;
@@ -15,7 +16,13 @@ class Flashcards {
 }
 
 class FlashcardViewer extends StatefulWidget {
-  late List<Flashcards> flashcards = [Flashcards("Un Cuarto", "One-fourth\n1/4"), Flashcards("Dos-Novenos", "Two-Ninths\n2/9"), Flashcards("Tres-Cuartos", "Three-fourths\n3/4"), Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"), Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")];
+  late List<Flashcards> flashcards = [
+    Flashcards("Un Cuarto", "One-fourth\n1/4"),
+    Flashcards("Dos-Novenos", "Two-Ninths\n2/9"),
+    Flashcards("Tres-Cuartos", "Three-fourths\n3/4"),
+    Flashcards("Cinco-Sextos", "Five-Sixths\n5/6"),
+    Flashcards("Siete-Octavos", "Seven-Eighths\n7/8")
+  ];
   final int lessonNum;
 
   FlashcardViewer({required this.flashcards, required this.lessonNum, Key? key}) : super(key: key);
@@ -23,22 +30,23 @@ class FlashcardViewer extends StatefulWidget {
   @override
   _FlashcardViewerState createState() => _FlashcardViewerState();
 }
- 
-class _FlashcardViewerState extends State<FlashcardViewer>{
-  int _currentIndex = 0;
 
+class _FlashcardViewerState extends State<FlashcardViewer> {
+  int _currentIndex = 0;
   PageController _pageController = PageController(viewportFraction: 0.9);
+
   @override
   void initState() {
     super.initState();
-    widget.flashcards.shuffle(Random()); // Shuffle the list of questions
+    widget.flashcards.shuffle(Random());
   }
 
-  void fractionsLecture() async{
-        Navigator.pushReplacement( 
-      context, PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => FractionsFlashCards(), 
-        transitionsBuilder: (context,  animation, secondaryAnimation, child) {
+  void fractionsLecture() async {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => FractionsFlashCards(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.easeInOut;
@@ -51,14 +59,14 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
             child: child,
           );
         },
-      )
-    );  
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {                             
+  Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, //makes sure that the keyboard popping up from the bottom doesn't mess with the size of the page
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
@@ -106,13 +114,14 @@ class _FlashcardViewerState extends State<FlashcardViewer>{
                         ),
                       ),
                     ),
+                    ChatAssistant(), // Assistant added directly here
                   ],
-                )
-              )
-            )
-          ]
-        )
-      )
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -123,20 +132,22 @@ class FlashcardWidget extends StatelessWidget {
   final Color color;
   final Color borderColor;
 
-  FlashcardWidget({required this.flashcard, required this.fontColor, required this.color, required this.borderColor});
+  FlashcardWidget({
+    required this.flashcard,
+    required this.fontColor,
+    required this.color,
+    required this.borderColor,
+  });
 
-  String text(){
-    if(color.value == 0xFF0C2D57){
+  String get text {
+    if (color.value == 0xFF0C2D57) {
       return flashcard.backSide;
-    } else { 
+    } else {
       return flashcard.frontSide;
     }
   }
 
-  String audioFileName(){
-    return "lesson1_${flashcard.frontSide}.mp3";
-  }
-
+  String get audioFileName => "lesson1_${flashcard.frontSide}.mp3";
 
   @override
   Widget build(BuildContext context) {
@@ -155,29 +166,28 @@ class FlashcardWidget extends StatelessWidget {
           alignment: Alignment.center,
           padding: EdgeInsets.all(16),
           child: Text(
-            text(),
+            text,
             style: TextStyle(
               color: fontColor,
-              fontSize: 100, 
+              fontSize: 100,
               fontFamily: 'Outfit',
               fontWeight: FontWeight.w800,
             ),
             textAlign: TextAlign.center,
           ),
         ),
-
-        if(color.value == 0xFF0C2D57)
+        if (color.value == 0xFF0C2D57)
           Positioned(
             bottom: 50,
             right: 50,
-            child: ElevatedButton( 
-              onPressed: () async{
+            child: ElevatedButton(
+              onPressed: () async {
                 try {
                   final AudioPlayer audioPlayer = AudioPlayer();
                   audioPlayer.setVolume(1.0);
-                  await audioPlayer.play(AssetSource('flashcards/sounds/lesson1_${flashcard.frontSide}.mp3'));
+                  await audioPlayer.play(AssetSource('flashcards/sounds/$audioFileName'));
                 } catch (e) {
-                  log("Error playing audio: $e"); 
+                  log("Error playing audio: $e");
                 }
               },
               style: ElevatedButton.styleFrom(

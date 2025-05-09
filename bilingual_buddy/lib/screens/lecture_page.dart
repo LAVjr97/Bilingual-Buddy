@@ -3,6 +3,7 @@ import 'useful_widgets.dart';
 import 'lessons_page.dart';
 import 'globals.dart';
 import 'package:pdfx/pdfx.dart';
+import 'chat_assistant.dart';
 
 class LessonPage extends StatefulWidget{ 
   final String pdfPath;
@@ -63,25 +64,24 @@ class _LessonPage extends State<LessonPage>{
                       child: Container(
                         width: 1042,
                         height: 614,
-                        child: Container(
-                          padding: EdgeInsets.all(20), // Add padding to create space around the PDFView
-                          color: textColor,
-                          child: PdfView(
-                            controller: pdfController,
-                            builders: PdfViewBuilders<DefaultBuilderOptions>(
-                              options: DefaultBuilderOptions(),
-                            ),
-                          )
+                        padding: EdgeInsets.all(20),
+                        color: textColor,
+                        child: PdfView(
+                          controller: pdfController,
+                          builders: PdfViewBuilders<DefaultBuilderOptions>(
+                            options: DefaultBuilderOptions(),
+                          ),
                         ),
-                      )
-                    )
-                  ]
-                )
-              )
-            )
-          ]
-        )
-      )
+                      ),
+                    ),
+                    ChatAssistant(), 
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
