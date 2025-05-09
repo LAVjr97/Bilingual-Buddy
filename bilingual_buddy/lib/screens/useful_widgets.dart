@@ -675,9 +675,9 @@ Color getColorForPercentage(double percentage) {
   percentage = percentage.clamp(0, 100);
 
   // Define base colors
-  const bronze = Color(0xFFCD7F32);   
+  const bronze = Color(0xFFFFD700);   
   const silver = Color(0xFFC0C0C0);   
-  const gold   = Color(0xFFFFD700);   
+  const gold   = Color.fromARGB(255, 15, 189, 15);   
   const red = Color.fromARGB(255, 214, 18, 18); 
 
   if (percentage < 50) {
