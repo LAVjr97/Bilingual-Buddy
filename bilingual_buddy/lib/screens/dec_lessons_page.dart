@@ -136,7 +136,25 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                                 "One Point Five", "1.5",
                                 "Zero Point Nine", "0.9",
                                 "Seven Point Zero Five", "7.05"
-                              ], "Match each decimal with its English wording.")
+                              ], "Match each decimal with its English wording."), MATCH_TILES("Match the numbers to their English words.",
+                                    [
+                                      "Zero Point Seven Five", "0.75",
+                                      "Two Point Zero Three",   "2.03",
+                                      "Five Point Five",        "5.5",
+                                      "Nine Point Nine Nine",   "9.99"
+                                    ],
+                                    "Match each decimal with its English wording."
+                                  ),
+                              MATCH_TILES(
+                                  "Match the numbers to their English words.",
+                                  [
+                                    "Zero Point Zero One",     "0.01",
+                                    "Four Point Two",          "4.2",
+                                    "Eight Point Zero Eight",  "8.08",
+                                    "Six Point Six",           "6.6"
+                                  ],
+                                  "Match each decimal with its English wording."
+                                )
                             ], 6), 
                             x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted)
                             ),
@@ -324,16 +342,16 @@ class _DecimalsFlashCards extends State<DecimalsFlashCards> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         buttonText('1', () => flashCardPage([Flashcards("Cero punto cinco", "Zero point five\n0.5"),Flashcards("Uno punto dos", "One point two\n1.2"),Flashcards("Dos punto cinco", "Two point five\n2.5"),Flashcards("Tres punto catorce", "Three point one four\n3.14"),Flashcards("Cero punto veinticinco", "Zero point two five\n0.25")], 1), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
-                        buttonText('2', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
-                        buttonText('3', tempPage, x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('2', () => flashCardPage([Flashcards("Cuatro punto siete", "Four point seven\n4.7"), Flashcards("Cinco punto ocho", "Five point eight\n5.8"), Flashcards("Seis punto nueve", "Six point nine\n6.9"), Flashcards("Siete punto dos", "Seven point two\n7.2"), Flashcards("Ocho punto uno", "Eight point one\n8.1")], 2), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
+                        buttonText('3', () => flashCardPage([Flashcards("Nueve punto cuatro", "Nine point four\n9.4"), Flashcards("Cero punto doce", "Zero point one two\n0.12"), Flashcards("Dos punto cero cero cinco", "Two point zero zero five\n2.005"), Flashcards("Tres punto veinticinco", "Three point twenty-five\n3.25"), Flashcards("Cuatro punto uno", "Four point one\n4.1")], 3), x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buttonText('4', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
-                        buttonText('5', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
-                        buttonText('+', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('4', () => flashCardPage([Flashcards("Cinco punto seis", "Five point six\n5.6"), Flashcards("Seis punto cero cinco", "Six point zero five\n6.05"), Flashcards("Siete punto tres tres", "Seven point three three\n7.33"), Flashcards("Ocho punto ocho ocho", "Eight point eight eight\n8.88"), Flashcards("Nueve punto cero uno", "Nine point zero one\n9.01")], 4), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('5', () => flashCardPage([Flashcards("Diez punto uno cero", "Ten point one zero\n10.10"), Flashcards("Once punto once", "Eleven point eleven\n11.11"), Flashcards("Doce punto doce", "Twelve point twelve\n12.12"), Flashcards("Treinta punto tres", "Thirty point three\n30.3"), Flashcards("Cincuenta punto cinco", "Fifty point five\n50.5")], 5), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('6', () => flashCardPage([Flashcards("Cero punto tres tres", "Zero point three three\n0.33"), Flashcards("Uno punto dos cinco", "One point two five\n1.25"), Flashcards("Dos punto cero dos", "Two point zero two\n2.02"), Flashcards("Tres punto cinco cinco", "Three point five five\n3.55"), Flashcards("Cuatro punto cero ocho", "Four point zero eight\n4.08")], 6), x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
                       ],
                     ),
                   ],
