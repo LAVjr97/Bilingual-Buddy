@@ -79,7 +79,8 @@ class _DecimalsLessonPage extends State<DecimalsLessonPage>{
                           )
                         ),
                       )
-                    )
+                    ),
+                    ChatAssistant(),
                   ]
                 )
               )

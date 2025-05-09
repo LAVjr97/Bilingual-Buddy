@@ -77,19 +77,19 @@ Color inputTextColor = Color(0xFFECECEC);
 // MCQ
 Color mcqQuestionColor = Color(0xFFFFB3FF);  // Bright pink
 TextStyle mcqTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Orange
-Color mcqButtonColor = Color(0xFFFFB3FF); // hot pink
+Color mcqButtonColor = Color(0xFFD699FF); // hot pink 0xFF80CCFF
 Color mcqButtonTextColor = Color(0xD50C2D57);
 
 // TF
-Color tfQuestionColor = Color(0xFFFF6666);  // 0xFFF57D1F
+Color tfQuestionColor = Color(0xFFFF8080);  // 0xFFF57D1F
 TextStyle tfTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Bold violet
-Color tfButtonColor = Color(0xFFFF6666);  // lavender
+Color tfButtonColor = Color(0xFFFFE066);  // lavender
 Color tfButtonTextColor = Color(0xD50C2D57);
 
 // TXT
 Color txtQuestionColor = Color(0xFFDDEB9D);  // Orange-yellow
 TextStyle txtTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Deep navy
-Color txtButtonColor = Color(0xFFDDEB9D); // orange-yellow
+Color txtButtonColor = Color(0xFFC299FF); // orange-yellow
 Color txtButtonTextColor = Color(0xD50C2D57);
 
 

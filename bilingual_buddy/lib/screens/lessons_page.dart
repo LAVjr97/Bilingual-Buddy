@@ -71,13 +71,13 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                         buttonText('2', () => quiz([
                           MCQ("Which fraction is equivalent to 3/6?", ["One-Half", "Two-Thirds", "Three-Fourths"], 0, "Cual fracción es equivalente a 3/6?"),
                           TF("One-fourth is smaller than one-half.\n", ["True", "False"], 0, "Una cuarta parte es más pequeña que la mitad."),
-                          MCQ("How do you write 7/8 in English?", ["Seven-Eighths", "Seven-Fifths", "Seven-Tenths"], 0, "¿Cómo se escribe 7/8 en inglés?"),
-                          TF("Two-fifths is larger than one-half.\n", ["True", "False"], 1, "Dos quintos es más grande que la mitad.")], 2),
+                          TXT("How do you write 3/8 in English?", "Three-Eighths", "Como se escribe 3/8 en ingles?"),
+                          TF("Three-quarters is written as 3/4.\n", ["True", "False"], 0, "Tres cuartos se escribe 3/4.")], 2),
                           x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[1].percentCompleted)
                         ),
                         buttonText('3', () => quiz([
                           MCQ("How do you write 5/6 in English?", ["Five-Sixths", "Five-Eighths", "Five-Thirds"], 0, "¿Cómo se escribe 5/6 en inglés?"),
-                          TF("One-third is smaller than one-half.\n", ["True", "False"], 0, "Un tercio es más pequeño que la mitad."),
+                          TXT("How do you write 3/8 in English?", "Three-Eighths", "Como se escribe 3/8 en ingles?"),
                           MCQ("Which fraction is equivalent to 4/8?", ["One-Half", "Two-Thirds", "Three-Fourths"], 0, "¿Qué fracción es equivalente a 4/8?"),
                           TF("Two-fourths is the same as one-half.\n", ["True", "False"], 0, "Dos cuartos es lo mismo que la mitad.")], 3),
                           x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[2].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[2].percentCompleted)
@@ -205,7 +205,7 @@ class _FractionsLessons extends State<FractionsLessons>{
                       children: [
                         buttonText('4', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
                         buttonText('5', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
-                        buttonText('+', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
+                        buttonText('6', tempPage, x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128),
                       ],
                     )
                   ]
