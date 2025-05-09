@@ -122,10 +122,12 @@ Widget emojiText(String topEmoji, String bottomText, double width, double fontSi
   );
 }
 
-Widget singleText(String text, double width, double fontSize){
+Widget singleText(String text, double width, double fontSize, {Color? textC}){
   width = width - 50;
   assert(width > 1);
   double height = fontSize + 45;
+
+  textC ??= textColor;
 
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +145,7 @@ Widget singleText(String text, double width, double fontSize){
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: textColor,
+                    color: textC,
                     fontSize: fontSize,
                     fontFamily: 'Outfit',
                     fontWeight: FontWeight.w800,
@@ -158,7 +160,7 @@ Widget singleText(String text, double width, double fontSize){
   );
 }
 
-Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, double? width, double? height, double? fontSize, Color? backColor}){
+Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, double? width, double? height, double? fontSize, Color? backColor, Color? textC}){
   x ??= 0.0;
   y ??= 0.0;
 
@@ -166,6 +168,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
   height ??= 385;
 
   fontSize ??= 75;
+  textC ??= textColor;
 
   backColor ??= buttonColor;
   
@@ -183,7 +186,7 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
             borderRadius: BorderRadius.circular(84),
           ),
         ),
-        child: singleText(text, width, fontSize),
+        child: singleText(text, width, fontSize, textC: textC),
       )
     )
   );

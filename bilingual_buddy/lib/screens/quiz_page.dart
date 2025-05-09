@@ -358,8 +358,8 @@ class _TFPage extends State<TFPage>{
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
-                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor),
-                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor),
+                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor, textC: tfButtonTextColor),
+                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor, textC: tfButtonTextColor),
                     FlipCardQuizCard(question: widget.question),
                   ]
                 )
@@ -561,9 +561,9 @@ class _MCQPage extends State<MCQPage>{
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
-                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
-                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
-                    buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
+                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor, textC: mcqButtonTextColor),
+                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor, textC: mcqButtonTextColor),
+                    buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor, textC: mcqButtonTextColor),
                     FlipCardQuizCard(question: widget.question),
                   ]
                 )
@@ -869,7 +869,7 @@ class _TXTPage extends State<TXTPage> {
                     height: 412,
                     backColor: txtQuestionColor),
                     boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100, fontSize: 48, backColor: txtQuestionColor),
-                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
+                    buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48, backColor: txtQuestionColor),
 
                   ]
                 )
