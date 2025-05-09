@@ -1,11 +1,27 @@
 // File: dec_quiz_hint.dart
 
+import 'package:bilingual_buddy/screens/quiz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
-import 'dec_quiz_page.dart';
+import 'dec_quiz_page.dart' as dec;
+import 'globals.dart';
+
+Color getDecimalQuestionColor(dec.Question question) {
+  if (question is dec.MCQ) return mcqQuestionColor;
+  if (question is dec.TF) return tfQuestionColor;
+  if (question is dec.TXT) return txtQuestionColor;
+  return textBackgroundColor;
+}
+
+TextStyle getDecimalQuestionTextStyle(dec.Question question) {
+  if (question is dec.MCQ) return mcqTextStyle;
+  if (question is dec.TF) return tfTextStyle;
+  if (question is dec.TXT) return txtTextStyle;
+  return TextStyle(fontSize: 24, color: textColor);
+}
 
 class DecimalsFlipCardQuizCard extends StatefulWidget {
-  final Question question;
+  final dec.Question question;
 
   const DecimalsFlipCardQuizCard({
     required this.question,
@@ -47,8 +63,10 @@ class _DecimalsFlipCardQuizCardState extends State<DecimalsFlipCardQuizCard> {
           key: cardKey,
           direction: FlipDirection.VERTICAL,
           front: _buildCard(
-            backgroundColor: const Color(0xFFFFCFB3),
-            textColor: const Color(0xFF0C2D57),
+            backgroundColor: getDecimalQuestionColor(widget.question),
+            textColor: getDecimalQuestionTextStyle(widget.question).color ?? Colors.black ,
+            // backgroundColor: const Color(0xFFFFCFB3),
+            // textColor: const Color(0xFF0C2D57),
             content: widget.question.question,
             buttonLabel: "Hint",
             buttonColor: Colors.blue,

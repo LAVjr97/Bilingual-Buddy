@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'quiz_page.dart';
+import 'globals.dart';
+
 
 class FlipCardQuizCard extends StatefulWidget {
   final Question question;
@@ -41,8 +43,8 @@ class _FlipCardQuizCardState extends State<FlipCardQuizCard> {
           key: cardKey,
           direction: FlipDirection.VERTICAL,
           front: _buildCard(
-            backgroundColor: Color(0xFFFFCFB3),
-            textColor: Color(0xFF0C2D57),
+            backgroundColor: getQuestionColor(widget.question),
+            textColor: getQuestionTextStyle(widget.question).color ?? Colors.black,
             content: widget.question.question,
             buttonLabel: "Hint",
             buttonColor: Colors.blue,

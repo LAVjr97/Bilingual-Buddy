@@ -7,6 +7,22 @@ import 'quiz_hint.dart';
 import 'package:confetti/confetti.dart';
 import 'globals.dart';
 
+//Different colors for each type of question
+Color getQuestionColor(Question question) {
+  if (question is MCQ) return mcqQuestionColor;
+  if (question is TF) return tfQuestionColor;
+  if (question is TXT) return txtQuestionColor;
+  return textBackgroundColor;
+}
+
+TextStyle getQuestionTextStyle(Question question) {
+  if (question is MCQ) return mcqTextStyle;
+  if (question is TF) return tfTextStyle;
+  if (question is TXT) return txtTextStyle;
+  return TextStyle(fontSize: 24, color: textColor);
+}
+
+
 class Question{
   String question;
   String hint;
@@ -195,6 +211,16 @@ class _TFPage extends State<TFPage>{
       shuffledAnswers[j] = temp;
     }
   }
+   Widget mcqAnswerButton(String text, VoidCallback onPressed, {double? x, double? y}) {
+    return buttonText(
+      text,
+      onPressed,
+      x: x,
+      y: y,
+      backColor: mcqButtonColor, // <- make sure this is defined in globals.dart
+      fontSize: 48,
+    );
+  }
 
   void fractionQuizzes(){
     Navigator.pushReplacement( 
@@ -332,8 +358,8 @@ class _TFPage extends State<TFPage>{
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
-                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48),
-                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48),
+                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.025, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor),
+                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.575, width: 400, height: 156, fontSize: 48, backColor: tfButtonColor),
                     FlipCardQuizCard(question: widget.question),
                   ]
                 )
@@ -520,6 +546,7 @@ class _MCQPage extends State<MCQPage>{
     }
   }
 
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -534,9 +561,9 @@ class _MCQPage extends State<MCQPage>{
                 child: Stack(
                   children: [
                     backTextMenuBar(context, leaveQuiz, "Lesson ${widget.lessonNum} Exercises"),
-                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48),
-                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48),
-                    buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48),
+                    buttonText(shuffledAnswers[0], () => checkAnswer(0), x: 0.85, y: -0.35, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
+                    buttonText(shuffledAnswers[1], () => checkAnswer(1), x: 0.85, y: 0.25, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
+                    buttonText(shuffledAnswers[2], () => checkAnswer(2), x: 0.85, y: 0.85, width: 400, height: 156, fontSize: 48, backColor: mcqButtonColor),
                     FlipCardQuizCard(question: widget.question),
                   ]
                 )
@@ -835,8 +862,13 @@ class _TXTPage extends State<TXTPage> {
                   children: [
 
                     backTextMenuBar(context, leaveQuiz, "Lesson 1 Exercises"),
-                    boxText(widget.question.question, x: 0.0, y: -0.05, width: 1133, height: 412),
-                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100),
+                    boxText(widget.question.question, 
+                    x: 0.0, 
+                    y: -0.05, 
+                    width: 1133, 
+                    height: 412,
+                    backColor: txtQuestionColor),
+                    boxInput(input, "Type Answer", x: -0.7, y: 0.85, width: 784, height: 100, fontSize: 48, backColor: txtQuestionColor),
                     buttonText("Submit", checkAnswer, x: 0.75, y: 0.85, width: 250, height: 100, fontSize: 48)
 
                   ]

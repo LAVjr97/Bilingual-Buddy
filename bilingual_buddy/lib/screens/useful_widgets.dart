@@ -364,7 +364,8 @@ Widget backTextMenuBar(BuildContext context, VoidCallback pressed, String label,
   );
 }
 
-Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor}) {
+// Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor}) {
+Widget boxText(String text, {double? x, double? y, double? width, double? height, double? fontSize, Color? backColor}) {
   x ??= -0.85;
   y ??= 0.85;
 
@@ -372,7 +373,7 @@ Widget boxText(String text, {double? x, double? y, double? width, double? height
   height ??= 614;
 
   fontSize ??= 64;
-  boxColor ??= 0xFFFFCFB3;
+  // boxColor ??= 0xFFFFCFB3;
 
 
   return Align(
@@ -381,7 +382,8 @@ Widget boxText(String text, {double? x, double? y, double? width, double? height
       width: width,
       height: height,
       decoration: ShapeDecoration(
-        color: buttonColor,
+        color: backColor ?? textBackgroundColor,
+        //color: buttonColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
@@ -620,7 +622,7 @@ Widget menuButton(BuildContext context){
   );
 }
 
-Widget boxInput(TextEditingController inputController, String hint, {double? x, double? y, double? width, double? height, double? fontSize, int? boxColor}){
+Widget boxInput(TextEditingController inputController, String hint, {double? x, double? y, double? width, double? height, double? fontSize, Color? backColor}){
   x ??= -0.85;
   y ??= 0.85;
 
@@ -628,7 +630,8 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
   height ??= 91;
 
   fontSize ??= 48;
-  boxColor ??= 0xFFFFF5CD;
+  // boxColor ??= 0xFFFFF5CD;
+  backColor ??= textBackgroundColor;
 
   return Align( 
     alignment: Alignment(x, y),
@@ -636,7 +639,7 @@ Widget boxInput(TextEditingController inputController, String hint, {double? x, 
       width: width,
       height: height,
       decoration: ShapeDecoration(
-        color: inputTextColor,
+        color: backColor ?? textBackgroundColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(84),
