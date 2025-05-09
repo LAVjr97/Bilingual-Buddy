@@ -122,7 +122,7 @@ class _DecimalsFlashcardViewerState extends State<DecimalsFlashcardViewer> {
                         ),
                       ),
                     ),
-                    //const ChatAssistant(), //chat assistant
+                    const ChatAssistant(), //chat assistant
                   ],
                 ),
               ),
