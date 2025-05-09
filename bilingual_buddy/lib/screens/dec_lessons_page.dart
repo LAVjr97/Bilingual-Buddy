@@ -136,7 +136,9 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                                 "One Point Five", "1.5",
                                 "Zero Point Nine", "0.9",
                                 "Seven Point Zero Five", "7.05"
-                              ], "Match each decimal with its English wording."), MATCH_TILES("Match the numbers to their English words.",
+                              ], "Match each decimal with its English wording."), 
+                              
+                              MATCH_TILES("Match the numbers to their English words.",
                                     [
                                       "Zero Point Seven Five", "0.75",
                                       "Two Point Zero Three",   "2.03",
