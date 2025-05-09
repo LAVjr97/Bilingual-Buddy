@@ -136,27 +136,9 @@ class _DecimalsQuizzes extends State<DecimalsQuizzes> {
                                 "One Point Five", "1.5",
                                 "Zero Point Nine", "0.9",
                                 "Seven Point Zero Five", "7.05"
-                              ], "Match each decimal with its English wording."), 
+                              ], "Match each decimal with its English wording.") 
                               
-                              MATCH_TILES("Match the numbers to their English words.",
-                                    [
-                                      "Zero Point Seven Five", "0.75",
-                                      "Two Point Zero Three",   "2.03",
-                                      "Five Point Five",        "5.5",
-                                      "Nine Point Nine Nine",   "9.99"
-                                    ],
-                                    "Match each decimal with its English wording."
-                                  ),
-                              MATCH_TILES(
-                                  "Match the numbers to their English words.",
-                                  [
-                                    "Zero Point Zero One",     "0.01",
-                                    "Four Point Two",          "4.2",
-                                    "Eight Point Zero Eight",  "8.08",
-                                    "Six Point Six",           "6.6"
-                                  ],
-                                  "Match each decimal with its English wording."
-                                )
+                  
                             ], 3), 
                             x: 0.0, y: 0.85, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.decimalQuizzes[5].percentCompleted)
                             ),

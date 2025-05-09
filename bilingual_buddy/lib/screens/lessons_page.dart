@@ -65,11 +65,11 @@ class _FractionsQuizzes extends State<FractionsQuizzes>{
                           MCQ("How do you write a quarter in English?", ["One-Fifth", "One-Fourth", "One-Sixth"], 1,"¿Cómo se escribe un cuarto en inglés?"),
                           TF("Half is known as 1/2.\n", ["False", "True"], 1, "La mitad se conoce como 1/2."),
                           MCQ("How do you write 2/9 in English?", ["Two-Ninths", "Two-Halves", "One-Seventh"], 0, "¿Cómo se escribe 2/9 en inglés?"),
-                          MCQ("How do you write 4/8 in English?", ["Four-Elevenths","Four-Eighths","Twelve-Eighths"], 1, "¿Cómo se escribe 4/8 en inglés?")], 1),
+                          TXT("How do you write 3/5 in English?", "Three-Fifths", "¿Cómo se escribe 3/5 en inglés?")], 1),
                           x: 0.0, y: -0.3, width: 310, height: 270, fontSize: 128, backColor: currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted == 0 ? Color(0xFFFFF5CD) : getColorForPercentage(currentStudent.quizCompletion.fractionQuizzes[0].percentCompleted)
                         ),
                         buttonText('2', () => quiz([
-                          MCQ("Which fraction is equivalent to 3/6?", ["1/2", "2/3", "3/4"], 0, "Cual fracción es equivalente a 3/6?"),
+                          MCQ("Which fraction is equivalent to 3/6?", ["One-Half", "Two-Thirds", "Three-Fourths"], 0, "Cual fracción es equivalente a 3/6?"),
                           TF("One-fourth is smaller than one-half.\n", ["True", "False"], 0, "Una cuarta parte es más pequeña que la mitad."),
                           MCQ("How do you write 7/8 in English?", ["Seven-Eighths", "Seven-Fifths", "Seven-Tenths"], 0, "¿Cómo se escribe 7/8 en inglés?"),
                           TF("Two-fifths is larger than one-half.\n", ["True", "False"], 1, "Dos quintos es más grande que la mitad.")], 2),

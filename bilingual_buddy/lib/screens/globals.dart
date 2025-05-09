@@ -75,22 +75,22 @@ Color inputTextColor = Color(0xFFECECEC);
 
 //"Random" Colors for Quiz Questions
 // MCQ
-Color mcqQuestionColor = Color(0xFFFFCFB3);  // Bright pink
-TextStyle mcqTextStyle = TextStyle(fontSize: 28, color: Color(0xFF0C2D57), fontWeight: FontWeight.bold); // Orange
-Color mcqButtonColor = Color(0xFFFFCFB3); // hot pink
-Color mcqButtonTextColor = Color(0xFF0C2D57);
+Color mcqQuestionColor = Color(0xFFFFB3FF);  // Bright pink
+TextStyle mcqTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Orange
+Color mcqButtonColor = Color(0xFFFFB3FF); // hot pink
+Color mcqButtonTextColor = Color(0xD50C2D57);
 
 // TF
-Color tfQuestionColor = Color(0xFFF57D1F);  // Lavender
-TextStyle tfTextStyle = TextStyle(fontSize: 28, color: Color(0xFF000000), fontWeight: FontWeight.bold); // Bold violet
-Color tfButtonColor = Color(0xFFF57D1F);  // lavender
-Color tfButtonTextColor = Color(0xFF000000);
+Color tfQuestionColor = Color(0xFFFF6666);  // 0xFFF57D1F
+TextStyle tfTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Bold violet
+Color tfButtonColor = Color(0xFFFF6666);  // lavender
+Color tfButtonTextColor = Color(0xD50C2D57);
 
 // TXT
 Color txtQuestionColor = Color(0xFFDDEB9D);  // Orange-yellow
-TextStyle txtTextStyle = TextStyle(fontSize: 28, color: Color(0xFF143D60), fontWeight: FontWeight.bold); // Deep navy
+TextStyle txtTextStyle = TextStyle(fontSize: 28, color: Color(0xD50C2D57), fontWeight: FontWeight.bold); // Deep navy
 Color txtButtonColor = Color(0xFFDDEB9D); // orange-yellow
-Color txtButtonTextColor = Color(0xFF143D60);
+Color txtButtonTextColor = Color(0xD50C2D57);
 
 
 void createAppColorPalette(){
