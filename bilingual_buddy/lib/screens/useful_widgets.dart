@@ -183,7 +183,19 @@ Widget buttonText(String text, VoidCallback pressed, {double? x, double? y, doub
             borderRadius: BorderRadius.circular(84),
           ),
         ),
-        child: singleText(text, width, fontSize),
+        // child: singleText(text, width, fontSize),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: textColor,
+            fontSize: fontSize,
+            fontFamily: 'Outfit',
+            fontWeight: FontWeight.w800,
+          ),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
       )
     )
   );
