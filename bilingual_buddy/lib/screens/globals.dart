@@ -38,7 +38,7 @@ void createStudentMap() {
       quizCompletion: Completion(
         // Six fraction quizzes (match your original totalQuestions per quiz)
         fractionQuizzes: [
-          QuizCompletion(1, 4),
+          QuizCompletion(0, 4),
           QuizCompletion(0, 4),
           QuizCompletion(0, 4),
           QuizCompletion(0, 4),
