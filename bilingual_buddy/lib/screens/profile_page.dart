@@ -31,7 +31,13 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${student.info.firstName} ${student.info.lastName}'),
+        title: Text(
+          '${student.info.firstName} ${student.info.lastName}',
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: textColor,
         foregroundColor: buttonColor,
       ),
@@ -42,41 +48,42 @@ class ProfilePage extends StatelessWidget {
           Text(
             "Fractions Progress",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 34,
               fontWeight: FontWeight.bold,
               color: textColor,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: textColor, width: 2),    // outline color & width
-                borderRadius: BorderRadius.circular(8),               // rounded corners on the outline
-              ),
-              padding: const EdgeInsets.all(2),                       // space between border and bar
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),               // match inner rounding
-                child: LinearProgressIndicator(
-                  value: fractionOverall,
-                  minHeight: 12,
-                  backgroundColor: buttonColor.withOpacity(0.2),
-                  color: Colors.green,
-                ),
+            decoration: BoxDecoration(
+              border: Border.all(color: textColor, width: 3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.all(3),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: fractionOverall,
+                minHeight: 24,
+                backgroundColor: buttonColor.withOpacity(0.2),
+                color: Colors.green,
               ),
             ),
+          ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           // Fractions Quiz List
           ...List.generate(fractionList.length, (index) {
             final quiz = fractionList[index];
             return Card(
-              elevation: 3,
-              margin: const EdgeInsets.symmetric(vertical: 8),
+              elevation: 4,
+              margin: const EdgeInsets.symmetric(vertical: 12),
               child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 title: Text(
                   "Quiz ${index + 1}",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: textColor,
                   ),
@@ -84,8 +91,8 @@ class ProfilePage extends StatelessWidget {
                 trailing: Text(
                   "${quiz.percentCompleted.toStringAsFixed(0)}%",
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
                     color: quiz.percentCompleted == 100.0
                         ? Colors.green
                         : Colors.red,
@@ -95,47 +102,48 @@ class ProfilePage extends StatelessWidget {
             );
           }),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 40),
 
           // Decimals Section Header
           Text(
             "Decimals Progress",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 34,
               fontWeight: FontWeight.bold,
               color: textColor,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: textColor, width: 2),
-              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: textColor, width: 3),
+              borderRadius: BorderRadius.circular(10),
             ),
-            padding: const EdgeInsets.all(2),
+            padding: const EdgeInsets.all(3),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(8),
               child: LinearProgressIndicator(
                 value: decimalOverall,
-                minHeight: 12,
+                minHeight: 24,
                 backgroundColor: buttonColor.withOpacity(0.2),
                 color: Colors.green,
               ),
             ),
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           // Decimals Quiz List
           ...List.generate(decimalList.length, (index) {
             final quiz = decimalList[index];
             return Card(
-              elevation: 3,
-              margin: const EdgeInsets.symmetric(vertical: 8),
+              elevation: 4,
+              margin: const EdgeInsets.symmetric(vertical: 12),
               child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 title: Text(
                   "Quiz ${index + 1}",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: textColor,
                   ),
@@ -143,8 +151,8 @@ class ProfilePage extends StatelessWidget {
                 trailing: Text(
                   "${quiz.percentCompleted.toStringAsFixed(0)}%",
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
                     color: quiz.percentCompleted == 100.0
                         ? Colors.green
                         : Colors.red,
