@@ -33,7 +33,7 @@ void createStudentMap() {
         completedFlashCards: [0.0],
       ),
     ),
-    'r877zLHljvd8BpxDwZjeZ3sghMj1': Student(
+    'fOmfctAOYWUUnB2dtEsP8vIyi4x2': Student(
       info: StudentInfo(1, 'Bucky', 'Bronco'),
       quizCompletion: Completion(
         // Six fraction quizzes (match your original totalQuestions per quiz)
